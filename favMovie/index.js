@@ -1,5 +1,5 @@
 let comments = [];
-let ids = [];
+let latestId;
 
 let commentsListElement = document.getElementById("comments-list");
 
@@ -7,7 +7,8 @@ function renderComment(comment) {
 	const listItem = document.createElement("li");
 
 	const text = document.createElement("p");
-	const rating = document.createElement("p");
+	const rating = document.createElement("span");
+	const ratingNumber = document.createElement("span");
 
 	const removeButton = document.createElement("button");
 	removeButton.type = "button";
@@ -17,18 +18,18 @@ function renderComment(comment) {
 	console.log(removeButton);
 
 	text.textContent = comment.text;
-	rating.textContent = comment.rating;
+	rating.textContent = "/5";
+	ratingNumber.textContent = comment.rating;
+
+	ratingNumber.appendChild(rating)
 
 	listItem.appendChild(text)
-	listItem.appendChild(rating)
+	listItem.appendChild(ratingNumber)
 	listItem.appendChild(removeButton);
 
 	commentsListElement.appendChild(listItem);
-	removingComments();
+	addListenersToRemovers();
 }
-
-
-
 
 
 const commentFormElement = document.getElementById("comment-form");
@@ -53,9 +54,13 @@ commentFormElement.addEventListener("submit", function (event) {
 });
 
 function getAvailableID() {
-	ids.push(1);
+	if (latestId === undefined) {
+		latestId = 1;
+	} else {
+		latestId++;
+	}
 
-	return ids.length;
+	return latestId;
 }
 
 function renderComments() {
@@ -64,41 +69,36 @@ function renderComments() {
 	}
 }
 
-function removingComments() {
+function addListenersToRemovers() {
 	document.querySelectorAll(".remove-comment")
 		.forEach(button => {
 			button.addEventListener("click", event => {
 				if (event.target.className === "remove-comment") {
-					removeComment(button.id);
+					removeComment(button);
 				}
 			})
 		});
 }
 
-function removeComment(commentId) {
-	let commentToRemove = undefined;
 
+function removeComment(button) {
+	//removing comment review from DOM
+    commentsListElement.removeChild(button.parentElement);
+
+	//removing comment from comments array
+	let commentToRemove;
 	for (const comment of comments) {
-        console.log(comment.identifier, commentId)
-		if (comment.identifier == commentId) {
-           
+		if (comment.identifier == button.id) {
 			commentToRemove = comment;
 		}
 	}
-    
-
-    commentsListElement.removeChild(document.getElementById(commentId).parentElement);
-
 	const index = comments.indexOf(commentToRemove);
 	if (index > -1) {
 		comments.splice(index, 1);
 	}
-    console.log(comments);
 
-    
-    
 }
 
 
 renderComments();
-removingComments();
+addListenersToRemovers();
