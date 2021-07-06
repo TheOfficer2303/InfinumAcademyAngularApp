@@ -1,6 +1,7 @@
 let comments = [];
 let ratings = [];
 let latestId;
+let commentRating = 1;
 
 let commentsListElement = document.getElementById("comments-list");
 
@@ -60,8 +61,7 @@ commentFormElement.addEventListener("submit", function (event) {
 	const formData = new FormData(commentFormElement);
 
 	const commentText = formData.get("comment-text");
-	const commentRating = formData.get("rating-number");
-
+	
 	let comment = {
 		text: commentText,
 		rating: commentRating,
@@ -116,6 +116,20 @@ function removeComment(button) {
 
 	renderAverageRating();
 
+}
+
+let stars = document.querySelectorAll(".stars")
+for (const star of stars) {
+	star.addEventListener("click", function() {
+		for (let i = 0; i < stars.length; i++) {
+			if (stars[i].id <= star.id) {
+				stars[i].src = "images/painted-star.png";
+			} else {
+				stars[i].src = "images/empty-star.png";
+			}
+		}
+		commentRating = parseInt(star.id.substring(5, 6));
+	})
 }
 
 
