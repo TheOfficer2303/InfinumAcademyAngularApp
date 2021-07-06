@@ -25,29 +25,33 @@
 				carry out a worldwide massacre of individuals whom he deems immoral and to create a crime-free society, using
 				the alias of a god-like vigilante named "Kira", and the subsequent efforts of an elite Japanese police task
 				force, led by enigmatic detective L, to apprehend him.</p>
-			<span id="avg-rating"></span>
+			<span id="avg-rating">X</span>/5
 		</div>
 	</section>
 
-    <section class="reviewing">
-        <h1 class="title" id="review-title">Reviews</h1>
-        <form id="comment-form">
-            <input type="text" placeholder="Add review">
-        </form>
+	<section class="reviewing">
+		<h1 class="title" id="review-title">Reviews</h1>
+		<form id="comment-form">
+			<input name="comment-text" id="comment-text" type="text" placeholder="Add review">
 
-        <div id="rating">
-            <span>Rating</span>
-            <img src="" alt="Stars">
-        </div>
 
-        <input type="submit" value="POST">
-    </section>
+			<div id="rating">
+				<span id="">Rating</span>
+				<input name="rating-number" type="number" min="0" max="5" id="rating-number">
+			</div>
 
-    <section class="comments">
-        <ul id="comments">
-            
-        </ul>
-    </section>
+			<button type="submit">POST</button>
+
+		</form>
+	</section>
+
+	<section class="comments">
+		<ul id="comments-list">
+
+		</ul>
+	</section>
+
+	<script src="index.js"></script>
 </body>
 
 </html>
