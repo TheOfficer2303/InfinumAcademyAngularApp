@@ -22,7 +22,6 @@ function renderComment(comment) {
 
 	const text = document.createElement("p");
 	const rating = document.createElement("span");
-	const ratingNumber = document.createElement("span");
 
 	const removeButton = document.createElement("button");
 	removeButton.type = "button";
@@ -32,13 +31,21 @@ function renderComment(comment) {
 	console.log(removeButton);
 
 	text.textContent = comment.text;
-	rating.textContent = "/5";
-	ratingNumber.textContent = comment.rating;
 
-	ratingNumber.appendChild(rating)
-
+	//star rating in comment
+	for (let i = 0; i < 5; i++) {
+		let starImage = document.createElement("img");
+		starImage.classList.add("stars-in-comment")
+		if (i < comment.rating) {
+			starImage.src = "images/painted-star.png";
+		} else {
+			starImage.src = "images/empty-star.png";
+		}
+		rating.appendChild(starImage);
+	}
+	
 	listItem.appendChild(text)
-	listItem.appendChild(ratingNumber)
+	listItem.appendChild(rating)
 	listItem.appendChild(removeButton);
 
 	commentsListElement.appendChild(listItem);
