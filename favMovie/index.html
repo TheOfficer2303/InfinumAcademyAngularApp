@@ -5,10 +5,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
 	<title>Tv Shows App</title>
 </head>
 
-<body>
+<body class="body">
 
 	<h1 id="main-title">TV SHOWS APP</h1>
 
@@ -37,7 +38,12 @@
 
 			<div id="rating">
 				<span id="">Rating</span>
-				<input name="rating-number" type="number" min="0" max="5" id="rating-number">
+				<!-- <input name="rating-number" type="number" min="1" max="5" id="rating-number" required> -->
+				<img src="images/empty-star.png" alt="" id="star-1" class="stars empty-star">
+				<img src="images/empty-star.png" alt="" id="star-2" class="stars empty-star">
+				<img src="images/empty-star.png" alt="" id="star-3" class="stars empty-star">
+				<img src="images/empty-star.png" alt="" id="star-4" class="stars empty-star">
+				<img src="images/empty-star.png" alt="" id="star-5" class="stars empty-star">
 			</div>
 
 			<button type="submit">POST</button>
