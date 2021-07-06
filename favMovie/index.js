@@ -3,8 +3,13 @@ if (localStorage.getItem("comments") !== undefined) {
 	comments = JSON.parse(localStorage.getItem("comments") || "[]");
 } 
 
+let latestId = 1;
+if (localStorage.getItem("latestId") !== undefined) {
+	latestId = JSON.parse(localStorage.getItem("latestId"));
+}
+
 let ratings = [];
-let latestId;
+
 let commentRating = 1;
 
 let commentsListElement = document.getElementById("comments-list");
@@ -85,12 +90,9 @@ commentFormElement.addEventListener("submit", function (event) {
 });
 
 function getAvailableID() {
-	if (latestId === undefined) {
-		latestId = 1;
-	} else {
-		latestId++;
-	}
+	latestId++;
 
+	localStorage.setItem("latestId", JSON.stringify(latestId))
 	return latestId;
 }
 
