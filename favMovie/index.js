@@ -1,7 +1,20 @@
 let comments = [];
+let ratings = [];
 let latestId;
 
 let commentsListElement = document.getElementById("comments-list");
+
+function renderAverageRating() {
+	const avgRating = document.getElementById("avg-rating");
+
+	let sum = ratings.reduce((a, b) => a + b, 0);
+
+	if (ratings.length === 0) {
+		avgRating.textContent = "0";
+	} else {
+		avgRating.textContent = Math.round((sum / ratings.length) * 100) / 100;
+	}
+}
 
 function renderComment(comment) {
 	const listItem = document.createElement("li");
@@ -29,8 +42,15 @@ function renderComment(comment) {
 
 	commentsListElement.appendChild(listItem);
 	addListenersToRemovers();
+	ratings.push(parseInt(comment.rating));
+	renderAverageRating();
 }
 
+function renderComments() {
+	for (const comment of comments) {
+		renderComment(comment);
+	}
+}
 
 const commentFormElement = document.getElementById("comment-form");
 
@@ -63,11 +83,7 @@ function getAvailableID() {
 	return latestId;
 }
 
-function renderComments() {
-	for (const comment of comments) {
-		renderComment(comment);
-	}
-}
+
 
 function addListenersToRemovers() {
 	document.querySelectorAll(".remove-comment")
@@ -83,7 +99,7 @@ function addListenersToRemovers() {
 
 function removeComment(button) {
 	//removing comment review from DOM
-    commentsListElement.removeChild(button.parentElement);
+	commentsListElement.removeChild(button.parentElement);
 
 	//removing comment from comments array
 	let commentToRemove;
@@ -95,10 +111,14 @@ function removeComment(button) {
 	const index = comments.indexOf(commentToRemove);
 	if (index > -1) {
 		comments.splice(index, 1);
+		ratings.splice(index, 1);
 	}
+
+	renderAverageRating();
 
 }
 
 
 renderComments();
+renderAverageRating();
 addListenersToRemovers();
