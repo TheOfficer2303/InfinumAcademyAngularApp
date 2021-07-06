@@ -1,4 +1,8 @@
 let comments = [];
+if (localStorage.getItem("comments") !== undefined) {
+	comments = JSON.parse(localStorage.getItem("comments") || "[]");
+} 
+
 let ratings = [];
 let latestId;
 let commentRating = 1;
@@ -61,7 +65,6 @@ function renderComments() {
 }
 
 const commentFormElement = document.getElementById("comment-form");
-
 commentFormElement.addEventListener("submit", function (event) {
 	event.preventDefault();
 
@@ -78,6 +81,7 @@ commentFormElement.addEventListener("submit", function (event) {
 
 	comments.push(comment);
 	renderComment(comment);
+	localStorage.setItem("comments", JSON.stringify(comments));
 });
 
 function getAvailableID() {
@@ -122,9 +126,11 @@ function removeComment(button) {
 	}
 
 	renderAverageRating();
+	localStorage.setItem("comments", JSON.stringify(comments));
 
 }
 
+//star rating
 let stars = document.querySelectorAll(".stars")
 for (const star of stars) {
 	star.addEventListener("click", function() {
