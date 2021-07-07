@@ -28,6 +28,7 @@ function renderAverageRating() {
 
 function renderComment(comment) {
 	const listItem = document.createElement("li");
+	listItem.classList.add("comment-list-item")
 
 	const text = document.createElement("p");
 	const rating = document.createElement("div");
