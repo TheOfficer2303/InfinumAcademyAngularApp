@@ -30,7 +30,7 @@ function renderComment(comment) {
 	const listItem = document.createElement("li");
 
 	const text = document.createElement("p");
-	const rating = document.createElement("span");
+	const rating = document.createElement("div");
 
 	const removeButton = document.createElement("button");
 	removeButton.type = "button";
