@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Show } from 'src/app/services/show/show.model';
 
 @Component({
   selector: 'app-show-card',
@@ -15,6 +16,9 @@ export class ShowCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  logPercentageRating(rating:number) {
+    console.log(Show.ratingInPercentage(rating));
   }
 
 }
