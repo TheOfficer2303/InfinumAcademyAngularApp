@@ -18,29 +18,36 @@ export class AllShowsContainerComponent implements OnInit {
 	mockData: Array < any > = [{
 			title: 'The Office',
 			description: 'Some text',
-			average_rating: 4,
+			average_rating: 8,
 			image_url: 'https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg'
 		},
 		{
 			title: 'Јужни Ветар',
 			description: 'Some text',
-			average_rating: 3,
+			average_rating: 7,
 			image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8SzwV858xAjuiODRgfP2SKTjHcjQIb6os9tIC2Vu4OyrJQmqaZ3Y11pesuGFuSYB65Qc&usqp=CAU'
 		},
 		{
 			title: 'La Casa de Papel',
 			description: 'Some text',
-			average_rating: 4,
+			average_rating: 9,
 			image_url: 'https://www.avoir-alire.com/IMG/arton42400.png'
+		},
+		{
+			title: 'South Park',
+			description: 'Some text',
+			average_rating: 10,
+			image_url: 'https://southparkstudios.mtvnimages.com/uri/mgid:arc:content:shared.southpark.us.en:17ba224c-7a62-4a92-be6c-3144b6d80a48?quality=0.7'
 		}
 	]
 
-  shows: Array<Show>
+  shows: Array<Show>;
   
 	ngOnInit(): void {
     this.shows = this.mockData.map((show) => {
       return new Show(show)
     })
+		console.log(this.shows)
   }
 
 }
