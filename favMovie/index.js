@@ -8,8 +8,6 @@ if (localStorage.getItem("latestId") !== undefined) {
 	latestId = JSON.parse(localStorage.getItem("latestId"));
 }
 
-let ratings = [];
-
 let commentRating = 1;
 
 let commentsListElement = document.getElementById("comments-list");
@@ -17,12 +15,16 @@ let commentsListElement = document.getElementById("comments-list");
 function renderAverageRating() {
 	const avgRating = document.getElementById("avg-rating");
 
-	let sum = ratings.reduce((a, b) => a + b, 0);
+	let sum = 0;
 
-	if (ratings.length === 0) {
+	for (const comment of comments) {
+		sum += parseInt(comment.rating);
+	}
+
+	if (comments.length === 0) {
 		avgRating.textContent = "0";
 	} else {
-		avgRating.textContent = Math.round((sum / ratings.length) * 100) / 100;
+		avgRating.textContent = (sum / comments.length).toFixed(2);
 	}
 }
 
@@ -37,8 +39,16 @@ function renderComment(comment) {
 	removeButton.type = "button";
 	removeButton.textContent = "Remove";
 	removeButton.classList.add("remove-comment");
-	removeButton.setAttribute("id", comment.identifier);
-	console.log(removeButton);
+	removeButton.addEventListener("click", function() {
+		commentsListElement.removeChild(listItem);
+
+		let index =  comments.indexOf(comment);
+		comments.splice(index, 1);
+
+		renderAverageRating();
+		localStorage.setItem("comments", JSON.stringify(comments));
+	})
+	
 
 	text.textContent = comment.text;
 
@@ -59,8 +69,6 @@ function renderComment(comment) {
 	listItem.appendChild(removeButton);
 
 	commentsListElement.appendChild(listItem);
-	addListenersToRemovers();
-	ratings.push(parseInt(comment.rating));
 	renderAverageRating();
 }
 
@@ -81,7 +89,7 @@ commentFormElement.addEventListener("submit", function (event) {
 	let comment = {
 		text: commentText,
 		rating: commentRating,
-		identifier: getAvailableID()
+	
 	}
 	console.log(comment)
 
@@ -89,49 +97,6 @@ commentFormElement.addEventListener("submit", function (event) {
 	renderComment(comment);
 	localStorage.setItem("comments", JSON.stringify(comments));
 });
-
-function getAvailableID() {
-	latestId++;
-
-	localStorage.setItem("latestId", JSON.stringify(latestId))
-	return latestId;
-}
-
-
-
-function addListenersToRemovers() {
-	document.querySelectorAll(".remove-comment")
-		.forEach(button => {
-			button.addEventListener("click", event => {
-				if (event.target.className === "remove-comment") {
-					removeComment(button);
-				}
-			})
-		});
-}
-
-
-function removeComment(button) {
-	//removing comment review from DOM
-	commentsListElement.removeChild(button.parentElement);
-
-	//removing comment from comments array
-	let commentToRemove;
-	for (const comment of comments) {
-		if (comment.identifier == button.id) {
-			commentToRemove = comment;
-		}
-	}
-	const index = comments.indexOf(commentToRemove);
-	if (index > -1) {
-		comments.splice(index, 1);
-		ratings.splice(index, 1);
-	}
-
-	renderAverageRating();
-	localStorage.setItem("comments", JSON.stringify(comments));
-
-}
 
 //star rating
 let stars = document.querySelectorAll(".stars")
@@ -151,4 +116,4 @@ for (const star of stars) {
 
 renderComments();
 renderAverageRating();
-addListenersToRemovers();
+// addListenersToRemovers();
