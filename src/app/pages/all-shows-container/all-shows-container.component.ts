@@ -16,7 +16,7 @@ import { Show } from 'src/app/services/show/show.model';
 export class AllShowsContainerComponent implements OnInit {
 
 	mockData: Array < any > = [{
-			title: 'Office',
+			title: 'The Office',
 			description: 'Some text',
 			average_rating: 4,
 			image_url: 'https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg'
