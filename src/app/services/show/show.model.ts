@@ -1,4 +1,9 @@
 export class Show {
+	title: string;
+	description: string;
+	average_rating: number;
+	image_url: string;
+
 	constructor(mockdata: any) {
 		this.title = mockdata.title;
 		this.description = mockdata.description;
@@ -7,8 +12,8 @@ export class Show {
 
 	}
 
-	title: string;
-	description: string;
-	average_rating: number;
-	image_url: string;
+	static ratingInPercentage(rating:number) {
+		return (rating / 10) * 100 + "%"
+	}
+	
 }
