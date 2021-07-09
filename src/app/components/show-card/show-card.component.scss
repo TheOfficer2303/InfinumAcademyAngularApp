@@ -1,15 +1,19 @@
 .show-image {
 	width: 240px;
 	height: 300px;
+	margin-right: 0px;
 }
 
 .show-card {
 	border-radius: 24px;
 	overflow: hidden;
-	object-fit: cover;
+	object-fit:cover;
 	display: inline-block;
 	margin: 16px;
+	padding-right: 0px;
+	width: 230px;
 	height: 400px;
+	cursor: pointer;
 }
 
 .rating {
