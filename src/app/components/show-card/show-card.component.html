@@ -1,10 +1,10 @@
-<mat-card (click)="logPercentageRating(average_rating)" class="show-card">
+<mat-card (click)="logPercentageRating(show)" class="show-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-title>{{ show.title }}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image [src]="image_url" alt="" class="show-image">
+  <img mat-card-image [src]="show.image_url" alt="" class="show-image">
   
-  <app-rating [average_rating]="average_rating"></app-rating>
+  <app-rating [average_rating]="show.average_rating"></app-rating>
 
 </mat-card>

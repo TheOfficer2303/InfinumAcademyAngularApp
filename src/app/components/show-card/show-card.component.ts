@@ -9,16 +9,13 @@ import { Show } from 'src/app/services/show/show.model';
 })
 export class ShowCardComponent implements OnInit {
 
-  @Input() title:string;
-  @Input() image_url:string;
-  @Input() average_rating:number;
-  
+  @Input() show:Show;
   constructor() { }
 
   ngOnInit(): void {
   }
-  logPercentageRating(rating:number) {
-    console.log(Show.ratingInPercentage(rating));
+  logPercentageRating(show:Show) {
+    console.log(show.ratingInPercentage());
   }
 
 }

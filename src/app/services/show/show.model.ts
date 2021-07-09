@@ -12,8 +12,8 @@ export class Show {
 
 	}
 
-	static ratingInPercentage(rating:number) {
-		return (rating / 10) * 100 + "%"
+	ratingInPercentage() {
+		return (this.average_rating / 10) * 100 + "%"
 	}
 	
 }

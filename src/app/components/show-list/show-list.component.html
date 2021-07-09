@@ -1,8 +1,6 @@
 <ng-container *ngFor="let show of shows">
 	<app-show-card
-		[title]="show.title"
-		[image_url]="show.image_url"
-		[average_rating]="show.average_rating"
+		[show]="show"
 	>
 	</app-show-card>
 </ng-container>
