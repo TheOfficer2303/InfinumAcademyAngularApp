@@ -11,10 +11,11 @@ import { AllShowsContainerComponent } from './pages/all-shows-container/all-show
 import { ShowListComponent } from './components/show-list/show-list.component';
 import { ShowCardComponent } from './components/show-card/show-card.component';
 import { RatingComponent } from './components/rating/rating.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule],
+	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
