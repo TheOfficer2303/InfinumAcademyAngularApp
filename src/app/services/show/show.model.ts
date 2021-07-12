@@ -12,7 +12,7 @@ export class Show {
 
 	}
 
-	ratingInPercentage() {
+	get ratingInPercentage() {
 		return (this.averageRating / 5) * 100 + "%"
 	}
 	
