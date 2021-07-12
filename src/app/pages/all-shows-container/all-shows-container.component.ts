@@ -46,7 +46,7 @@ export class AllShowsContainerComponent implements OnInit {
 	ngOnInit(): void {
     this.shows = this.mockData.map((show) => {
 			show = new Show(show);
-			console.log(show.ratingInPercentage())
+			console.log(show.ratingInPercentage)
       return show;
     })
 		console.log(this.shows)
