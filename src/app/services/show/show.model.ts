@@ -1,15 +1,18 @@
+import { IRawShow } from "src/app/interfaces/rawShow.interface";
+
 export class Show {
 	title: string;
 	description: string;
 	averageRating: number;
 	imageUrl: string;
+	id: string
 
-	constructor(mockdata: any) {
+	constructor(mockdata: IRawShow) {
 		this.title = mockdata.title;
-		this.description = mockdata.description;
-		this.averageRating = mockdata.average_rating;
-		this.imageUrl = mockdata.image_url;
-
+		this.description = mockdata.description || 'Default description';
+		this.averageRating = mockdata.averageRating;
+		this.imageUrl = mockdata.imageUrl;
+		this.id = mockdata.id
 	}
 
 	get ratingInPercentage() {
