@@ -15,7 +15,7 @@ export class ShowCardComponent implements OnInit {
   ngOnInit(): void {
   }
   logPercentageRating(show:Show) {
-    console.log(show.ratingInPercentage());
+    console.log(show.ratingInPercentage);
   }
 
 }

@@ -1,4 +1,6 @@
-<div class="rating">
-	<mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
-	{{ average_rating }}/10
+	<ng-container *ngFor="let i of [].constructor(average_rating)">
+		<mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+	</ng-container>
+	<div class="rating">
+	{{ average_rating }}/5
 </div>
