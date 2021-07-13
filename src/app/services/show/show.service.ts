@@ -46,4 +46,8 @@ export class ShowService {
   public getTopRatedShows(): Array<Show> {
       return this.getShows().filter(show => show.averageRating > 4)
   }
+
+  public getShowById(id: string): Show | undefined {
+    return this.getShows().find((show: Show) => show.id === id) 
+  }
 }

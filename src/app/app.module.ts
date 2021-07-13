@@ -14,9 +14,10 @@ import { RatingComponent } from './components/rating/rating.component';
 import {MatIconModule} from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
+import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
 
 @NgModule({
-	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent],
+	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent],
 	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, AppRoutingModule],
 	providers: [],
 	bootstrap: [AppComponent],
