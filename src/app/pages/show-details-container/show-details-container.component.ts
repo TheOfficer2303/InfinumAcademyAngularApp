@@ -11,7 +11,10 @@ import { ShowService } from 'src/app/services/show/show.service';
 })
 export class ShowDetailsContainerComponent implements OnInit {
 
-  constructor(private showService: ShowService, private activatedRoute:ActivatedRoute) { }
+  constructor(
+      private showService: ShowService,
+      private activatedRoute: ActivatedRoute,
+ ) {}
 
   show: Show | undefined;
   ngOnInit(): void {
