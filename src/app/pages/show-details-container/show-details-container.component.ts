@@ -16,7 +16,7 @@ export class ShowDetailsContainerComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
  ) {}
 
-  show: Show | undefined;
+  public show: Show | undefined;
   ngOnInit(): void {
     const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
 
