@@ -17,6 +17,7 @@ export class ShowDetailsContainerComponent implements OnInit {
  ) {}
 
   public show: Show | undefined;
+	
   ngOnInit(): void {
     const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -24,5 +25,4 @@ export class ShowDetailsContainerComponent implements OnInit {
       this.show = this.showService.getShowById(id);
     }
   }
-
 }
