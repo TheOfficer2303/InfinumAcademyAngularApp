@@ -7,6 +7,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {
-  @Input() average_rating:number;
+  @Input() averageRating: number;
 
 }
