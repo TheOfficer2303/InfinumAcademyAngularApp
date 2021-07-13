@@ -18,8 +18,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: '**',
-    component: AllShowsContainerComponent
+  	path: '**',
+  	redirectTo: ''
   }
 ];
 
