@@ -1,0 +1,19 @@
+.show-card {
+	border-radius: 24px;
+	overflow: hidden;
+	display: inline-block;
+	margin: 16px;
+	width: 320px;
+	padding-right: 0px;
+}
+
+.show-image {
+	margin-top: 16px;
+	object-fit: cover;
+}
+
+.show-header {
+	display: flex;
+	justify-content: space-between;
+	padding: 3px 10px;
+}
