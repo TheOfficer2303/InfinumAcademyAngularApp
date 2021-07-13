@@ -1,6 +1,10 @@
 .rating {
+	display: flex;
 	width: 50px;
+	align-items: center;
+	column-gap: 7px;
 }
+
 :host{
 	display: block;
 }
