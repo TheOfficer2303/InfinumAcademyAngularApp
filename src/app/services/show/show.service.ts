@@ -37,17 +37,17 @@ export class ShowService {
   }
 ]
 
-  public getShows(): Array<Show> {
+  getShows(): Array<Show> {
       return this.mockData.map((show: IRawShow) => {
         return new Show(show)
       })
   }
 
-  public getTopRatedShows(): Array<Show> {
+  getTopRatedShows(): Array<Show> {
       return this.getShows().filter(show => show.averageRating > 4)
   }
 
-  public getShowById(id: string): Show | undefined {
+  getShowById(id: string): Show | undefined {
     return this.getShows().find((show: Show) => show.id === id) 
   }
 }
