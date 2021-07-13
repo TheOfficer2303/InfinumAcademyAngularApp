@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ILink } from 'src/app/interfaces/links.interface';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,11 +7,18 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./side-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent {
 
-  constructor() { }
+ links: Array<ILink> = [
+   {
+     url: '',
+     title: 'All shows'
+   },
+   {
+     url: 'top-rated',
+     title: 'Top Rated'
+   }
+ ]
 
-  ngOnInit(): void {
-  }
 
 }
