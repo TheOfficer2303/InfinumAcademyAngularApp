@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Show } from 'src/app/services/show/show.model';
 
 @Component({
@@ -7,12 +7,7 @@ import { Show } from 'src/app/services/show/show.model';
   styleUrls: ['./show-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShowListComponent implements OnInit {
+export class ShowListComponent {
   @Input() shows: Array<Show>
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
