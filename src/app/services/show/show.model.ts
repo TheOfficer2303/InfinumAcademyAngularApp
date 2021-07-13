@@ -15,7 +15,7 @@ export class Show {
 		this.id = mockdata.id
 	}
 
-	get ratingInPercentage() {
+	get ratingInPercentage(): string {
 		return (this.averageRating / 5) * 100 + "%"
 	}
 	

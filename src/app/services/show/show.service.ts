@@ -7,7 +7,7 @@ import { Show } from './show.model';
 })
 export class ShowService {
 
-  private mockData: Array < any > = [{
+  private mockData: Array<IRawShow> = [{
     title: 'The Office',
     description: 'Some text',
     averageRating: 5,
@@ -44,7 +44,7 @@ export class ShowService {
   }
 
   getTopRatedShows(): Array<Show> {
-      return this.getShows().filter(show => show.averageRating > 4)
+      return this.getShows().filter((show: Show) => show.averageRating > 4)
   }
 
   getShowById(id: string): Show | undefined {
