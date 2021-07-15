@@ -2,12 +2,12 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Show } from 'src/app/services/show/show.model';
 
 @Component({
-  selector: 'app-show-list',
-  templateUrl: './show-list.component.html',
-  styleUrls: ['./show-list.component.scss'],
+  selector: 'app-show-detail',
+  templateUrl: './show-detail.component.html',
+  styleUrls: ['./show-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShowListComponent {
-  @Input() shows: Array<Show>
 
+export class ShowDetailComponent {
+  @Input() show: Show;
 }

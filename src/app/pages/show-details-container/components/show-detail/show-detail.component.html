@@ -1,0 +1,15 @@
+<mat-card class="show-card">
+	<div class="show-detail">
+		<div class="show-header">
+		 <mat-card-title>{{ show.title }}</mat-card-title>
+		 <app-rating [average_rating]="show.averageRating" class="rating"></app-rating>
+		</div>
+		<div class="show-image">
+			<img mat-card-image [src]="show.imageUrl" alt="" class="show-image">
+		</div>
+		<div class="description">
+			<p>{{show.description}}</p>
+		</div>
+ </div>	
+ </mat-card>
+ 

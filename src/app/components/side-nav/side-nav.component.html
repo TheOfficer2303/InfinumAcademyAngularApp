@@ -1,5 +1,5 @@
-<ul class="links-list">
-	<li><a href="#" class="link-item">All shows</a></li>
-	<li><a href="#" class="link-item">Top Rated</a></li>
-	<li><a href="#" class="link-item">My Profile</a></li>
+<ul>
+	<li *ngFor="let link of links">
+		<a [routerLink]="link.url" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">{{ link.title }}</a>
+	</li>
 </ul>

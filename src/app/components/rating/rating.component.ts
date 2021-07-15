@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-rating',
@@ -6,12 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styleUrls: ['./rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent implements OnInit {
-  @Input() average_rating:number;
+export class RatingComponent {
+  @Input() averageRating: number;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-  
 }

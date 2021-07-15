@@ -1,7 +1,12 @@
-.links-list {
-	list-style-type: none;
+ul {
+	list-style: none;
 }
 
-.link-item {
+a {
 	text-decoration: none;
+	font-size: 18px;
+}
+
+.active {
+	color: red;
 }
