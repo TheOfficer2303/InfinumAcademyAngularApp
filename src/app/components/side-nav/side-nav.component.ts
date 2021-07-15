@@ -9,7 +9,7 @@ import { ILink } from 'src/app/interfaces/links.interface';
 })
 export class SideNavComponent {
 
- links: Array<ILink> = [
+ public links: Array<ILink> = [
    {
      url: '',
      title: 'All shows'
