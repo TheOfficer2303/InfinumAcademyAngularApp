@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -9,17 +11,20 @@ import { ShowService } from 'src/app/services/show/show.service';
   styleUrls: ['./show-details-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShowDetailsContainerComponent implements OnInit {
+export class ShowDetailsContainerComponent {
+	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute) {}
 
-  constructor(private showService: ShowService, private activatedRoute:ActivatedRoute) { }
+	public show$: Observable <Show | null> = this.activatedRoute.paramMap.pipe(
+    switchMap((paramMap) => {
+      const id: string | null = paramMap.get('id');
 
-  show: Show | undefined;
-  ngOnInit(): void {
-    const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
+      if (id) {
+        return this.showService.getShowById(id);
+      }
 
-    if (id) {
-      this.show = this.showService.getShowById(id);
-    }
-  }
+      return of(null);
+    })
+  )
 
+	
 }
