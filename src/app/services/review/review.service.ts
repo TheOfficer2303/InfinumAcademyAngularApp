@@ -66,6 +66,5 @@ export class ReviewService {
 
   public getReviewsOfShowId(showId: string | null): Observable<Array<Review>> {
     return this.getReviews().pipe(map((reviews: Array<Review>) => reviews.filter((review: Review) => review.showId === showId)));
-    
   } 
 }

@@ -32,7 +32,7 @@ export class ShowDetailsContainerComponent {
       return of(null)
     })
   )
-  sub2 = this.id$.subscribe(val => this.id = val)
+  private sub2 = this.id$.subscribe(val => this.id = val)
 
   public template$: Observable <ITemplateData | null> = combineLatest([
     this.showService.getShowById(this.id),
@@ -54,7 +54,7 @@ export class ShowDetailsContainerComponent {
     })
   );
 
-  sub:Subscription = this.template$
+  private sub:Subscription = this.template$
 	.subscribe({
 		next: () => this.isLoading = false,
 		complete: () => this.isLoading = false
