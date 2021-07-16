@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import {  delay, map } from 'rxjs/operators'
+import {  delay, map} from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Show } from './show.model';
 
@@ -57,7 +57,7 @@ export class ShowService {
     return this.getShows().pipe(map((shows: Array<Show>) => shows.filter((show: Show) => show.averageRating > 4)));
   }
 
-  public getShowById(id: string): Observable<Show | null> {
+  public getShowById(id: string | null): Observable<Show | null> {
     return this.getShows().pipe(map((shows: Array<Show>) => shows.find((show: Show) => show.id === id) || null));
   }
 }

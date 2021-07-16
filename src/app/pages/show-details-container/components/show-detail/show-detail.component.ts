@@ -12,7 +12,7 @@ import { Show } from 'src/app/services/show/show.model';
 })
 
 export class ShowDetailComponent {
-  @Input() show: Show;
+  @Input() show: Show | null;
   @Input() error: string;
   
   constructor() {}

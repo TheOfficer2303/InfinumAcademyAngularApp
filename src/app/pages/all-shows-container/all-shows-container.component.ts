@@ -1,6 +1,6 @@
-import { Component,	ChangeDetectionStrategy } from '@angular/core';
+import { Component,	ChangeDetectionStrategy, OnInit} from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, tap } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -25,7 +25,7 @@ export class AllShowsContainerComponent {
 			retry(1)
 		)
 
-  sub:Subscription = this.showService.getShows()
+  sub:Subscription = this.shows$
 	.subscribe({
 		next: () => this.isLoading = false,
 		error: error => this.isLoading = false,

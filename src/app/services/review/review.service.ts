@@ -64,7 +64,7 @@ export class ReviewService {
     return of(this.reviews).pipe(delay(1000 + Math.random() * 1000));
   }
 
-  public getReviewsOfShowId(showId: string): Observable<Array<Review>> {
+  public getReviewsOfShowId(showId: string | null): Observable<Array<Review>> {
     return this.getReviews().pipe(map((reviews: Array<Review>) => reviews.filter((review: Review) => review.showId === showId)));
     
   } 
