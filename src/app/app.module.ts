@@ -18,9 +18,11 @@ import { TopRatedContainerComponent } from './pages/top-rated-container/top-rate
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
 import { ShowDetailComponent } from './pages/show-details-container/components/show-detail/show-detail.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 
 @NgModule({
-	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent],
+	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewComponent, ReviewListComponent],
 	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule],
 	providers: [],
 	bootstrap: [AppComponent],

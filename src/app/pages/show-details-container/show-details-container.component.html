@@ -4,6 +4,10 @@
 
 <ng-container *ngIf="(show$ | async) as show">
 	<app-show-detail [show]="show"></app-show-detail>
+
+	<div *ngIf="(reviews$ | async)" as reviews>
+		<app-review-list [rev]></app-review-list>
+	</div>
 </ng-container>
 
 <app-error-message [error]="error"></app-error-message>
