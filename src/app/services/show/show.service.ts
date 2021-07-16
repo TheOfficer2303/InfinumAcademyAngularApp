@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators'
+import { Observable, of, throwError } from 'rxjs';
+import {  map } from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Show } from './show.model';
 
@@ -43,21 +43,21 @@ export class ShowService {
     return this.mockData.map((show: IRawShow) => {
       return new Show(show)
     })
-}
-
-  getShows(): Observable<Array<Show>> {
-    return of(this.shows).pipe(delay(1000 + Math.random() * 1000))
-}
-
-  getTopRatedShows(): Observable<Array<Show>> {
-      return this.getShows().pipe(map((shows: Array<Show>) => shows.filter((show: Show) => show.averageRating > 4)));
   }
 
-  // getShowById(id: string): Show | undefined {
-  //   return this.shows.find((show: Show) => show.id === id) 
-  // }
+  public getShows(): Observable<Array<Show>> {
+    if (Math.random() <= 0.1) {
+      return throwError("ja sam ERRROR");
+    }
 
-  getShowById(id: string): Observable<Show | null> {
+    return of(this.shows);
+  }
+
+  public getTopRatedShows(): Observable<Array<Show>> {
+    return this.getShows().pipe(map((shows: Array<Show>) => shows.filter((show: Show) => show.averageRating > 4)));
+  }
+
+  public getShowById(id: string): Observable<Show | null> {
     return this.getShows().pipe(map((shows: Array<Show>) => shows.find((show: Show) => show.id === id) || null));
   }
 }

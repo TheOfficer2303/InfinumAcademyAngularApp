@@ -1,4 +1,9 @@
 <ng-container *ngIf="(shows$ | async) as shows">
 	<app-show-list [shows]="shows"></app-show-list>
+
+	<div *ngIf="(shows$ | async)?.length === 0">
+		NO DATA
+	</div>
+	
 </ng-container>
 

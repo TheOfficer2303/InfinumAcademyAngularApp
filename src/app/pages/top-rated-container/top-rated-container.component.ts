@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -11,7 +12,13 @@ import { ShowService } from 'src/app/services/show/show.service';
 })
 export class TopRatedContainerComponent {
   
-  public shows$: Observable<Array<Show>> = this.showService.getTopRatedShows();
-
+  public shows$: Observable < Array < Show >> = this.showService.getShows()
+		.pipe(
+			catchError(val => {
+				console.log(val);
+				return of([])
+			})
+		)
+    
   constructor(private showService: ShowService) { }
 }
