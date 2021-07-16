@@ -11,7 +11,8 @@ import { AllShowsContainerComponent } from './pages/all-shows-container/all-show
 import { ShowListComponent } from './components/show-list/show-list.component';
 import { ShowCardComponent } from './components/show-card/show-card.component';
 import { RatingComponent } from './components/rating/rating.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
@@ -19,7 +20,7 @@ import { ShowDetailComponent } from './pages/show-details-container/components/s
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, AppRoutingModule],
+	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
