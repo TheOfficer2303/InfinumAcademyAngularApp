@@ -1,1 +1,4 @@
-<p>review-list works!</p>
+<ng-container *ngFor="let review of reviews">
+	<app-review [review]="review"></app-review>
+</ng-container>
+	

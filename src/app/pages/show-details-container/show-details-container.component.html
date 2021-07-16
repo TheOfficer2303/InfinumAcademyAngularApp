@@ -2,12 +2,14 @@
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
-<ng-container *ngIf="(show$ | async) as show">
-	<app-show-detail [show]="show"></app-show-detail>
-
-	<div *ngIf="(reviews$ | async)" as reviews>
-		<app-review-list [rev]></app-review-list>
-	</div>
+<ng-container *ngIf="error === undefined">
+	<ng-container *ngIf="(show$ | async) as show">
+		<app-show-detail [show]="show"></app-show-detail>
+	</ng-container>
+	
+	<ng-container *ngIf="(reviews$ | async) as reviews">
+		<app-review-list [reviews]="reviews"></app-review-list>
+	</ng-container>
 </ng-container>
 
 <app-error-message [error]="error"></app-error-message>
