@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
@@ -23,12 +24,12 @@ export class TopRatedContainerComponent{
 			})
 		)
 
-	private sub = this.shows$
+	sub:Subscription = this.showService.getShows()
 		.subscribe({
 			next: () => this.isLoading = false,
 			error: error => this.isLoading = false,
 			complete: () => this.isLoading = false
-		});
+	});
 
   constructor(private showService: ShowService) { }
 }

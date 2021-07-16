@@ -1,6 +1,6 @@
-import { Component,	ChangeDetectionStrategy, OnInit} from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
+import { Component,	ChangeDetectionStrategy } from '@angular/core';
+import { Observable, of, Subscription } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -11,7 +11,7 @@ import { ShowService } from 'src/app/services/show/show.service';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AllShowsContainerComponent implements OnInit{
+export class AllShowsContainerComponent {
 	public isLoading: Boolean = true;
 	public error: string;
 
@@ -25,17 +25,12 @@ export class AllShowsContainerComponent implements OnInit{
 			retry(1)
 		)
 
-	sub = this.showService.getShows()
+  sub:Subscription = this.showService.getShows()
 	.subscribe({
 		next: () => this.isLoading = false,
 		error: error => this.isLoading = false,
 		complete: () => this.isLoading = false
 	});
 	
-	
-	ngOnInit(): void {
-	
-	}
-
 	constructor(private showService: ShowService) {	}
 }

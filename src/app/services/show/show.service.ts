@@ -46,7 +46,7 @@ export class ShowService {
   }
 
   public getShows(): Observable<Array<Show>> {
-    if (Math.random() <= 0.1) {
+    if (Math.random() <= 0.1 ) {
       return throwError('Could not load data!');
     }
 

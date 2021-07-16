@@ -10,4 +10,6 @@ import { Show } from 'src/app/services/show/show.model';
 
 export class ShowDetailComponent {
   @Input() show: Show;
+  @Input() error: string;
+
 }
