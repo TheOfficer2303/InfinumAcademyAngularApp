@@ -1,11 +1,16 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
-import { catchError, retry, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+
+interface ITemplateData {
+  show: Show | null;
+  reviews: Array<Review>;
+}
 
 @Component({
   selector: 'app-show-details-container',
@@ -16,32 +21,42 @@ import { ShowService } from 'src/app/services/show/show.service';
 export class ShowDetailsContainerComponent {
 	public isLoading: Boolean = true;
   public error: string;
-  public reviews$: Observable<Array<Review>>;
+  private id: string | null = null;
 
-	public show$: Observable <Show | null> = this.activatedRoute.paramMap.pipe(
+  private id$ = this.activatedRoute.paramMap.pipe(
     switchMap((paramMap) => {
       const id: string | null = paramMap.get('id');
-
       if (id) {
-        this.reviews$ = this.reviewService.getReviewsOfShowId(id)
-        return this.showService.getShowById(id).pipe(
-          retry(1),
-          catchError(val => {
-            this.error = val;
-            console.log(this.error)  
-            return of(null)
-          })
-        )
+        return id
       }
-
-      return of(null);
+      return of(null)
     })
   )
+  sub2 = this.id$.subscribe(val => this.id = val)
 
-  sub:Subscription = this.showService.getShows()
+  public template$: Observable <ITemplateData | null> = combineLatest([
+    this.showService.getShowById(this.id),
+    this.reviewService.getReviewsOfShowId(this.id)
+  ]).pipe(
+    map(([show, reviews]) => {
+      return {
+        show,
+        reviews
+      } 
+    }), 
+    tap(console.log),
+    retry(1),
+    catchError(val => {
+      this.error = val;
+      this.isLoading = false;
+      console.log(this.error)  
+      return of(null)
+    })
+  );
+
+  sub:Subscription = this.template$
 	.subscribe({
 		next: () => this.isLoading = false,
-		error: error => this.isLoading = false,
 		complete: () => this.isLoading = false
 	});
 

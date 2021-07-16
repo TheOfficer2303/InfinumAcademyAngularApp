@@ -24,7 +24,7 @@ export class TopRatedContainerComponent{
 			})
 		)
 
-	sub:Subscription = this.showService.getShows()
+	sub:Subscription = this.shows$
 		.subscribe({
 			next: () => this.isLoading = false,
 			error: error => this.isLoading = false,
