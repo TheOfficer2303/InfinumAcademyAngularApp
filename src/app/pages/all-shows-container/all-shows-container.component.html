@@ -1,8 +1,12 @@
+<ng-container *ngIf="isLoading">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
 <ng-container *ngIf="(shows$ | async) as shows">
 	<app-show-list [shows]="shows"></app-show-list>
 
-	<div *ngIf="(shows$ | async)?.length === 0">
-		NO DATA
+	<div *ngIf="error !== undefined">
+		<app-error-message [error]="error"></app-error-message>
 	</div>
 	
 </ng-container>

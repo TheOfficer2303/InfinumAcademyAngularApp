@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -10,15 +10,25 @@ import { ShowService } from 'src/app/services/show/show.service';
   styleUrls: ['./top-rated-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopRatedContainerComponent {
-  
-  public shows$: Observable < Array < Show >> = this.showService.getShows()
+export class TopRatedContainerComponent{
+  public isLoading:Boolean = true;
+	public error: string;
+	
+  public shows$: Observable <Array<Show>> = this.showService.getTopRatedShows()
 		.pipe(
+			retry(1),
 			catchError(val => {
-				console.log(val);
+				this.error = val;
 				return of([])
 			})
 		)
-    
+
+	private sub = this.shows$
+		.subscribe({
+			next: () => this.isLoading = false,
+			error: error => this.isLoading = false,
+			complete: () => this.isLoading = false
+		});
+
   constructor(private showService: ShowService) { }
 }
