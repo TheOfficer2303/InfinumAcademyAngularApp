@@ -12,5 +12,4 @@ export class Review {
 		this.rating = mockData.rating;
 		this.comment = mockData.comment
 	}
-	
 }

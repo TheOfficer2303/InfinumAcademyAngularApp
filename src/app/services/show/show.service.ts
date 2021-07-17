@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import {  delay, map} from 'rxjs/operators'
+import { delay, map} from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Show } from './show.model';
 
@@ -33,7 +33,7 @@ export class ShowService {
   {
     title: 'South Park',
     description: 'Some text',
-    averageRating: 4,
+    averageRating: 5,
     imageUrl: 'https://southparkstudios.mtvnimages.com/uri/mgid:arc:content:shared.southpark.us.en:17ba224c-7a62-4a92-be6c-3144b6d80a48?quality=0.7',
     id: '4'
   }

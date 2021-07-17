@@ -24,10 +24,8 @@ export class TopRatedContainerComponent{
 			})
 		)
 
-	sub:Subscription = this.shows$
+	private sub:Subscription = this.shows$
 		.subscribe({
-			next: () => this.isLoading = false,
-			error: error => this.isLoading = false,
 			complete: () => this.isLoading = false
 	});
 

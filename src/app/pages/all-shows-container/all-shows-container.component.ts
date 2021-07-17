@@ -25,10 +25,8 @@ export class AllShowsContainerComponent {
 			retry(1)
 		)
 
-  sub:Subscription = this.shows$
+  private sub:Subscription = this.shows$
 	.subscribe({
-		next: () => this.isLoading = false,
-		error: error => this.isLoading = false,
 		complete: () => this.isLoading = false
 	});
 	

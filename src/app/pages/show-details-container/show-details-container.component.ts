@@ -56,7 +56,6 @@ export class ShowDetailsContainerComponent {
 
   private sub:Subscription = this.template$
 	.subscribe({
-		next: () => this.isLoading = false,
 		complete: () => this.isLoading = false
 	});
 
