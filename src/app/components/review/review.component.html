@@ -1,6 +1,6 @@
 <div class="review">
 	{{ review.comment }}
 	<div>
-		{{ review.rating }}/5
+		<app-rating [averageRating]="review.rating"></app-rating>
 	</div>
 </div>
