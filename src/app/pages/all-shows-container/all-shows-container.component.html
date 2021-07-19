@@ -1,13 +1,13 @@
-<ng-container *ngIf="isLoading">
+<ng-container *ngIf="isLoading$ | async">
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
 <ng-container *ngIf="(shows$ | async) as shows">
 	<app-show-list [shows]="shows"></app-show-list>
-
-	<div *ngIf="error !== undefined">
-		<app-error-message [error]="error"></app-error-message>
-	</div>
-	
 </ng-container>
+
+<div *ngIf="(error$ | async) as error">
+	<app-error-message [error]="error"></app-error-message>
+</div>
+	
 

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
@@ -19,9 +19,8 @@ interface ITemplateData {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShowDetailsContainerComponent {
-	public isLoading: Boolean = true;
-  public error: string;
-  private id: string | null = null;
+  public isLoading$ = new BehaviorSubject(true);
+	public error$ = new Subject<string>();
 
   private id$ = this.activatedRoute.paramMap.pipe(
     switchMap((paramMap) => {
@@ -32,32 +31,31 @@ export class ShowDetailsContainerComponent {
       return of(null)
     })
   )
-  private sub2 = this.id$.subscribe(val => this.id = val)
-
-  public template$: Observable <ITemplateData | null> = combineLatest([
-    this.showService.getShowById(this.id),
-    this.reviewService.getReviewsOfShowId(this.id)
-  ]).pipe(
-    map(([show, reviews]) => {
-      return {
-        show,
-        reviews
-      } 
-    }), 
-    tap(console.log),
-    retry(1),
-    catchError(val => {
-      this.error = val;
-      this.isLoading = false;
-      console.log(this.error)  
-      return of(null)
+ 
+  public template2$ = this.id$.pipe(
+    switchMap((id) => {
+      return  combineLatest([
+        this.showService.getShowById(id),
+        this.reviewService.getReviewsOfShowId(id)
+      ]).pipe(
+        map(([show, reviews]) => {
+          return {
+            show,
+            reviews
+          } 
+        }), 
+        catchError(val => {
+          this.error$.next(val);
+          this.isLoading$.next(val);  
+          return of(null)
+        }),
+        retry(1),
+        tap(() => {
+          this.isLoading$.next(false)
+        })
+      )
     })
-  );
-
-  private sub:Subscription = this.template$
-	.subscribe({
-		complete: () => this.isLoading = false
-	});
+  )  
 
 	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) {}
 }

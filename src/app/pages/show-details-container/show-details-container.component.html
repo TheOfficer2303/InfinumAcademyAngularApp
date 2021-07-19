@@ -1,10 +1,12 @@
-<ng-container *ngIf="isLoading">
+<ng-container *ngIf="isLoading$ | async">
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
-<ng-container *ngIf="(template$ | async) as template">
+<ng-container *ngIf="(template2$ | async) as template">
 	<app-show-detail [show]="template.show"></app-show-detail>
 	<app-review-list [reviews]="template.reviews"></app-review-list>
 </ng-container>
 
-<app-error-message [error]="error"></app-error-message>
+<div *ngIf="error$ | async as error">
+	<app-error-message [error]="error"></app-error-message>
+</div>

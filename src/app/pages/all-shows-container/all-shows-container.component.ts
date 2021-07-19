@@ -1,5 +1,5 @@
 import { Component,	ChangeDetectionStrategy, OnInit} from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
@@ -12,23 +12,21 @@ import { ShowService } from 'src/app/services/show/show.service';
 })
 
 export class AllShowsContainerComponent {
-	public isLoading: Boolean = true;
-	public error: string;
+	public isLoading$ = new BehaviorSubject(true);
+	public error$ = new Subject<string>();
 
 	public shows$: Observable <Array<Show>> = this.showService.getShows()
 		.pipe(
 			catchError(val => {
 				console.log(val);
-				this.error = val;
+				this.error$.next(val);
 				return of([])
 			}), 
-			retry(1)
+			retry(1),
+			tap(() => { 
+				this.isLoading$.next(false);
+			})
 		)
-
-  private sub:Subscription = this.shows$
-	.subscribe({
-		complete: () => this.isLoading = false
-	});
-	
+		
 	constructor(private showService: ShowService) {	}
 }

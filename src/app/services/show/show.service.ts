@@ -46,11 +46,14 @@ export class ShowService {
   }
 
   public getShows(): Observable<Array<Show>> {
-    if (Math.random() <= 0.1) {
-      return throwError('Could not load data!');
-    }
-
-    return of(this.shows).pipe(delay(1000 + Math.random() * 1000));
+    return of(this.shows).pipe(
+      delay(1000 + Math.random() * 1000),
+      map((shows) => {
+        if (Math.random() <= 0) {
+          throw new Error('Could not load data!');
+        }
+        return shows;
+      }));
   }
 
   public getTopRatedShows(): Observable<Array<Show>> {
