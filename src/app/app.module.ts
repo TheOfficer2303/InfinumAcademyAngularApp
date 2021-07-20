@@ -20,10 +20,17 @@ import { ShowDetailComponent } from './pages/show-details-container/components/s
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { ReviewComponent } from './components/review/review.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
+import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
+import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
+import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule],
+	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent],
+	imports: [HttpClientModule, BrowserModule, MatButtonModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
