@@ -1,12 +1,20 @@
 <mat-card>
-	<form>
-		<mat-form-field class="example-full-width" appearance="outline">
-			<mat-label>Address</mat-label>
-			<textarea matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
+	<mat-card-title>Register new user</mat-card-title>
+	<form [formGroup]="registration">
+		<mat-form-field appearance="outline">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email">
 		</mat-form-field>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<mat-label>Address 2</mat-label>
-			<textarea matInput></textarea>
+		<mat-form-field appearance="outline">
+			<mat-label>Password</mat-label>
+			<input matInput [type]="'password'" formControlName="password">
 		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Confirm password</mat-label>
+			<input matInput [type]="'password'" formControlName="confirmPassword">
+		</mat-form-field>
+
+		<button mat-raised-button [disabled]="registration.invalid">Register</button>
+		<p>Already have an account? Go to <a [routerLink]="'/login'">login</a> page!</p>
 	</form>
 </mat-card>

@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-registration-form',
@@ -6,11 +7,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./registration-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistrationFormComponent implements OnInit {
+export class RegistrationFormComponent {
+  public registration: FormGroup = this.fb.group({
+    email: [''],
+    password: [''],
+    confirmPassword: ['']
+  })
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private fb: FormBuilder) { }
 }
