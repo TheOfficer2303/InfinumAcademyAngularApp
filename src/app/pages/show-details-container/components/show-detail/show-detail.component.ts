@@ -1,4 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Review } from 'src/app/services/review/review.model';
+import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 
 @Component({
@@ -9,5 +12,10 @@ import { Show } from 'src/app/services/show/show.model';
 })
 
 export class ShowDetailComponent {
-  @Input() show: Show;
+  @Input() show: Show | null;
+  @Input() error: string;
+  
+  constructor() {}
+
+  
 }

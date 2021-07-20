@@ -18,5 +18,4 @@ export class Show {
 	get ratingInPercentage(): string {
 		return (this.averageRating / 5) * 100 + "%"
 	}
-	
 }

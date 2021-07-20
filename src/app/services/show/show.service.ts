@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { delay, map} from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Show } from './show.model';
 
@@ -31,23 +33,34 @@ export class ShowService {
   {
     title: 'South Park',
     description: 'Some text',
-    averageRating: 4,
+    averageRating: 5,
     imageUrl: 'https://southparkstudios.mtvnimages.com/uri/mgid:arc:content:shared.southpark.us.en:17ba224c-7a62-4a92-be6c-3144b6d80a48?quality=0.7',
     id: '4'
   }
 ]
 
-  public getShows(): Array<Show> {
-      return this.mockData.map((show: IRawShow) => {
-        return new Show(show)
-      })
+  private get shows(): Array<Show> {
+    return this.mockData.map((show: IRawShow) => {
+      return new Show(show)
+    })
   }
 
-  public getTopRatedShows(): Array<Show> {
-      return this.getShows().filter((show: Show) => show.averageRating > 4)
+  public getShows(): Observable<Array<Show>> {
+    return of(this.shows).pipe(
+      delay(1000 + Math.random() * 1000),
+      map((shows) => {
+        if (Math.random() <= 0) {
+          throw new Error('Could not load data!');
+        }
+        return shows;
+      }));
   }
 
-  public getShowById(id: string): Show | undefined {
-    return this.getShows().find((show: Show) => show.id === id) 
+  public getTopRatedShows(): Observable<Array<Show>> {
+    return this.getShows().pipe(map((shows: Array<Show>) => shows.filter((show: Show) => show.averageRating > 4)));
+  }
+
+  public getShowById(id: string | null): Observable<Show | null> {
+    return this.getShows().pipe(map((shows: Array<Show>) => shows.find((show: Show) => show.id === id) || null));
   }
 }
