@@ -1,11 +1,11 @@
-<ng-container *ngIf="reviews">
+<ng-container *ngIf="reviews?.length !==0 else noreviews">
 	<div *ngFor="let review of reviews" class="reviews">
 		<app-review [review]="review"></app-review>
 	</div>
 </ng-container>
 
-<ng-container *ngIf="reviews?.length === 0" >
+<ng-template #noreviews >
 	<div class="empty">
 		No reviews yet
 	</div>
-</ng-container>
+</ng-template>
