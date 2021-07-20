@@ -2,7 +2,7 @@
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
-<ng-container *ngIf="(template2$ | async) as template">
+<ng-container *ngIf="(templateData$ | async) as template">
 	<app-show-detail [show]="template.show"></app-show-detail>
 	<app-review-list [reviews]="template.reviews"></app-review-list>
 </ng-container>

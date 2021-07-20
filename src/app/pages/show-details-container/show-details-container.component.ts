@@ -32,7 +32,7 @@ export class ShowDetailsContainerComponent {
     })
   )
  
-  public template2$ = this.id$.pipe(
+  public templateData$ = this.id$.pipe(
     switchMap((id) => {
       return  combineLatest([
         this.showService.getShowById(id),
