@@ -1,7 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { mandatorySignValidator } from 'src/app/validators/mandatorySign.validator';
+import { letterCheckValidator } from 'src/app/validators/letterCheck.validator';
 import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
+
+export interface UserFormData {
+  email: string,
+  password: string,
+  password_confirmation: string
+}
 
 @Component({
   selector: 'app-registration-form',
@@ -10,8 +16,10 @@ import { samePasswordsValidator } from 'src/app/validators/samePasswords.validat
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationFormComponent {
+  @Output() registerUser: EventEmitter<UserFormData> = new EventEmitter()
+
   public registration: FormGroup = this.fb.group({
-    email: ['', [Validators.required, mandatorySignValidator]],
+    email: ['', [Validators.required, Validators.email, letterCheckValidator]],
     passwords: this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]]
@@ -21,4 +29,14 @@ export class RegistrationFormComponent {
   })
 
   constructor(private fb: FormBuilder) { }
+
+  public onRegister():void {
+    let nekiObjekt = {
+      email: this.registration.get("email")?.value,
+      password: this.registration.get(['passwords', 'password'])?.value,
+      password_confirmation: this.registration.get(['passwords', 'confirmPassword'])?.value
+    }
+    this.registerUser.emit(nekiObjekt);
+    this.registration.reset();
+  }
 }
