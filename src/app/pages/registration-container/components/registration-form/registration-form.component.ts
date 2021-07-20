@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mandatorySignValidator } from 'src/app/validators/mandatorySign.validator';
+import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
 
 @Component({
   selector: 'app-registration-form',
@@ -11,8 +12,12 @@ import { mandatorySignValidator } from 'src/app/validators/mandatorySign.validat
 export class RegistrationFormComponent {
   public registration: FormGroup = this.fb.group({
     email: ['', [Validators.required, mandatorySignValidator]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required]]
+    passwords: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]]
+    }, 
+      {validator: samePasswordsValidator}
+    )
   })
 
   constructor(private fb: FormBuilder) { }
