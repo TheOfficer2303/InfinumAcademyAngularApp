@@ -31,12 +31,11 @@ export class RegistrationFormComponent {
   constructor(private fb: FormBuilder) { }
 
   public onRegister():void {
-    let nekiObjekt = {
+    this.registerUser.emit({
       email: this.registration.get("email")?.value,
       password: this.registration.get(['passwords', 'password'])?.value,
       password_confirmation: this.registration.get(['passwords', 'confirmPassword'])?.value
-    }
-    this.registerUser.emit(nekiObjekt);
+    });
     this.registration.reset();
   }
 }

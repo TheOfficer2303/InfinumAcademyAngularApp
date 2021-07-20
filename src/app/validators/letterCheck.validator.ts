@@ -5,8 +5,8 @@ export function letterCheckValidator(control: FormControl): ValidationErrors | n
 	const indexOfAt = enteredValue.indexOf('@')
 	const username: string = enteredValue.substring(0, indexOfAt);
 
-	if (!username.match(/^[A-Za-z]+$/)) {
-		return { noLetters: 'Please include letters' }
+	if (!username.match(/^[a-zA-Z0-9_]+$/)) {
+		return { onlyLetters: 'Please do not include special characters' }
 	} else {
 		return null;
 	}

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserFormData } from './components/registration-form/registration-form.component';
 
@@ -21,13 +21,11 @@ export class RegistrationContainerComponent {
     this.authService.registerUser(userFormData).pipe(
       finalize(() => {
         this.isLoading$.next(false);
-      })
+      }),
+      tap(console.log)
     )
     .subscribe((userData: UserFormData) => {
       this.router.navigate(['']);
-    }
-
-    )
+    })
   }
-
 }

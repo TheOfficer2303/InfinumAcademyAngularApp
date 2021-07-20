@@ -1,14 +1,17 @@
 <mat-card>
 	<mat-card-title>Register new user</mat-card-title>
 	<form [formGroup]="registration">
+
 		<mat-form-field appearance="outline">
 			<mat-label>Email</mat-label>
 			<input matInput formControlName="email">
 			<mat-icon matPrefix>person</mat-icon>
-			<mat-error *ngIf="registration.get('email')?.errors?.required">Cannot be empty</mat-error>
-			<mat-error *ngIf="registration.get('email')?.errors?.email else letterCheckValidator">Hey! That's not an email!</mat-error>
-			<ng-template #letterCheckValidator>
-				<mat-error *ngIf="registration.get('email')?.errors?.noLetters">You should include at least one letter</mat-error>
+			<mat-error *ngIf="registration.get('email')?.errors?.required else notEmpty">Cannot be empty</mat-error>
+			<ng-template #notEmpty>
+				<mat-error *ngIf="registration.get('email')?.errors?.email else letterCheckValidator">Hey! That's not an email!</mat-error>
+				<ng-template #letterCheckValidator>
+					<mat-error *ngIf="registration.get('email')?.errors?.onlyLetters">Please do not include special characters</mat-error>
+				</ng-template>
 			</ng-template>
 		</mat-form-field>
 
