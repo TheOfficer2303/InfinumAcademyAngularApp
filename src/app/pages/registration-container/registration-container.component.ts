@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
@@ -14,7 +16,7 @@ import { UserFormData } from './components/registration-form/registration-form.c
 export class RegistrationContainerComponent {
   public isLoading$:Subject<boolean> = new Subject<boolean>()
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   public onRegisterUser(userFormData: UserFormData) {
     this.isLoading$.next(true)
@@ -26,6 +28,11 @@ export class RegistrationContainerComponent {
     )
     .subscribe((userData: UserFormData) => {
       this.router.navigate(['']);
+    }, (error: HttpErrorResponse) => {
+      console.log(error)
+      this.snackBar.open(error.error.errors[0], 'Close', {
+        duration: 3500
+      })
     })
   }
 }
