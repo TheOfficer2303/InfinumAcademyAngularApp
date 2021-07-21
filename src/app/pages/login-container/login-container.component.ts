@@ -19,7 +19,7 @@ export class LoginContainerComponent {
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   public onLogin(loginData: LoginData) {
-    this.isLoading$.next(true)
+    this.isLoading$.next(true);
     this.authService.loginUser(loginData).pipe(
       finalize(() => {
         this.isLoading$.next(false)
@@ -28,9 +28,9 @@ export class LoginContainerComponent {
       if (loginData !== undefined) {
         this.router.navigate(['']);
       } 
-    }, (error: HttpErrorResponse) => {
-      console.log(error)
-      this.snackBar.open(error.error.errors[0], 'Close', {
+    }, (errResponse: HttpErrorResponse) => {
+      console.log(errResponse)
+      this.snackBar.open(errResponse.error.errors, 'Close', {
         duration: 3500
       })
     })

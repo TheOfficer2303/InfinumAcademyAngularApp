@@ -28,9 +28,9 @@ export class RegistrationContainerComponent {
     )
     .subscribe((userData: UserFormData) => {
       this.router.navigate(['']);
-    }, (error: HttpErrorResponse) => {
-      console.log(error)
-      this.snackBar.open(error.error.errors[0], 'Close', {
+    }, (errResponse: HttpErrorResponse) => {
+      console.log(errResponse)
+      this.snackBar.open(errResponse.error.errors[0], 'Close', {
         duration: 3500
       })
     })

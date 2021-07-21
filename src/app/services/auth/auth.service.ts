@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { LoginData } from 'src/app/pages/login-container/login-form/login-form.component';
 import { UserFormData } from 'src/app/pages/registration-container/components/registration-form/registration-form.component';
 
@@ -17,7 +16,6 @@ export class AuthService {
   }
 
   public loginUser(loginData: LoginData): Observable<LoginData>{
-    return this.http.post<LoginData>('https://tv-shows.infinum.academy/users/sign_in', loginData).pipe(
-    )
+    return this.http.post<LoginData>('https://tv-shows.infinum.academy/users/sign_in', loginData);
   }
 }
