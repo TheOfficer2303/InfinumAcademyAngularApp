@@ -30,8 +30,8 @@
 				<mat-icon matPrefix>lock</mat-icon>
 				<mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.required">Cannot be empty</mat-error>
 			</mat-form-field>
-			<mat-error *ngIf="registration.get('passwords')?.errors?.notSame && (registration.get(['passwords', 'password'])?.touched && registration.get(['passwords', 'confirmPassword'])?.touched)">
-				Password mismatch!
+			<mat-error *ngIf="registration.get('passwords')?.errors?.notSame">
+				Passwords mismatch!
 			</mat-error>
 		</div>
 

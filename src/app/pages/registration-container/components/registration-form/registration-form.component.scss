@@ -1,5 +1,16 @@
 form {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	height: 100%;
+}
+
+button {
+	align-self: center;
+	width: 50%;
+	margin: 10px 0px;
+}
+
+mat-card {
+	background-color: #ddd;
 }
