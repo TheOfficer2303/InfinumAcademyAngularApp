@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { AllShowsContainerComponent } from './pages/all-shows-container/all-shows-container.component';
+import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: 'register', component: RegistrationContainerComponent }
+      { path: 'register', component: RegistrationContainerComponent },
+      { path: 'login', component: LoginContainerComponent }
     ]
   },
   {
