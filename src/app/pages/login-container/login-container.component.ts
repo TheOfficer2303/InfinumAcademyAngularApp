@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { IUserResponse } from 'src/app/interfaces/userResponse.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoginData } from './login-form/login-form.component';
 
@@ -24,8 +25,8 @@ export class LoginContainerComponent {
       finalize(() => {
         this.isLoading$.next(false)
       })
-    ).subscribe((loginData: LoginData) => {
-      if (loginData !== undefined) {
+    ).subscribe((loginData: IUserResponse) => {
+      if (loginData) {
         this.router.navigate(['']);
       } 
     }, (errResponse: HttpErrorResponse) => {
