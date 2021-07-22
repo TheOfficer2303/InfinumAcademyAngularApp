@@ -26,15 +26,21 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { LoginFormComponent } from './pages/login-container/login-form/login-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent],
 	imports: [HttpClientModule, BrowserModule, MatButtonModule,MatSnackBarModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
-	providers: [],
+	providers: [
+		{
+		provide: HTTP_INTERCEPTORS,
+		useClass: AuthErrorInterceptor,
+		multi: true,
+		}],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
