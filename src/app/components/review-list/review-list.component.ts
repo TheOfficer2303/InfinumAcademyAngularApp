@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Review } from 'src/app/services/review/review.model';
 
 @Component({
@@ -7,12 +7,6 @@ import { Review } from 'src/app/services/review/review.model';
   styleUrls: ['./review-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewListComponent implements OnInit {
+export class ReviewListComponent {
   @Input() reviews: Array<Review>;
-  
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.reviews)
-  }
 }
