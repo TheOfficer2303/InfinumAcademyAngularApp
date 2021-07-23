@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { ILink } from 'src/app/interfaces/links.interface';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -9,7 +11,9 @@ import { ILink } from 'src/app/interfaces/links.interface';
 })
 export class SideNavComponent {
 
- public links: Array<ILink> = [
+  constructor(private authService: AuthService, private router: Router) { }
+
+  public links: Array<ILink> = [
    {
      url: '',
      title: 'All shows'
@@ -17,8 +21,12 @@ export class SideNavComponent {
    {
      url: 'top-rated',
      title: 'Top Rated'
-   }
- ]
+    }
+  ]
 
+  public logOut() {
+    this.authService.logOut()
+    this.router.navigate(['/login'])
+  }
 
 }

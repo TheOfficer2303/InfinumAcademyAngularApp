@@ -17,4 +17,8 @@ export class StorageService {
   public add(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value))
   } 
+  
+  public delete(key: string): void {
+    localStorage.removeItem(key);
+  }
 }
