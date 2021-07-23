@@ -1,5 +1,5 @@
 export interface IUserResponse {
-	user: {
+	user: IRawUser
 		id: string;
 		email: string;
 		image_url: string;
