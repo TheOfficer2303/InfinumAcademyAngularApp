@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, of, Subject, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
   show: Show | null;
@@ -59,6 +60,14 @@ export class ShowDetailsContainerComponent {
     })
   );  	
 
-	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) {}
+  public post(reviewFormData: IReviewFormData) {
+    if (this.id) {
+      reviewFormData.show_id = this.id.toString();
+    }
+    this.reviewService.addReviewToShow(reviewFormData)
+    .subscribe()
+  }
+
+	constructor(private router: Router, private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) {}
    
 }
