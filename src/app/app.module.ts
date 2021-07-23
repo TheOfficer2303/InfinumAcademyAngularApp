@@ -31,11 +31,13 @@ import { LoginContainerComponent } from './pages/login-container/login-container
 import { LoginFormComponent } from './pages/login-container/login-form/login-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent],
 	imports: [HttpClientModule, BrowserModule, MatButtonModule,MatSnackBarModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
 	providers: [
+		
 		{
 		provide: HTTP_INTERCEPTORS,
 		useClass: AuthErrorInterceptor,
