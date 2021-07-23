@@ -1,8 +1,8 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export function samePasswordsValidator(control: AbstractControl): ValidationErrors | null {
-	const password1 = control.get('password');
-	const password2 = control.get('confirmPassword');
+	const password = control.get('password');
+	const confirmPassword = control.get('confirmPassword');
 
-	return password1 && password2 && password1.value === password2.value ? null : { notSame: 'Retry pls' }	
+	return password && confirmPassword && password.value === confirmPassword.value ? null : { notSame: 'Retry pls' }	
 }
