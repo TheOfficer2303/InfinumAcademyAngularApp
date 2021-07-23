@@ -21,6 +21,7 @@ interface ITemplateData {
 export class ShowDetailsContainerComponent {
   public isLoading$ = new BehaviorSubject(true);
 	public error$ = new Subject<string>();
+  private id: string | null = '';
 
   private id$ = this.activatedRoute.paramMap.pipe(
     switchMap((paramMap) => {
@@ -30,32 +31,34 @@ export class ShowDetailsContainerComponent {
       }
       return of(null)
     })
-  )
+  ).subscribe(id => {
+    if(id) {
+      this.id += id;
+    }
+  })
  
-  public templateData$ = this.id$.pipe(
-    switchMap((id) => {
-      return  combineLatest([
-        this.showService.getShowById(id),
-        this.reviewService.getReviewsOfShowId(id)
-      ]).pipe(
-        map(([show, reviews]) => {
-          return {
-            show,
-            reviews
-          } 
-        }), 
-        catchError(val => {
-          this.error$.next(val);
-          this.isLoading$.next(val);  
-          return of(null)
-        }),
-        retry(1),
-        tap(() => {
-          this.isLoading$.next(false)
-        })
-      )
+  public templateData$: Observable <ITemplateData | null> = combineLatest([
+    this.showService.getShowById(this.id),
+    this.reviewService.getReviewsOfShowId(this.id)
+  ]).pipe(
+    map(([show, reviews]) => {
+      return {
+        show,
+        reviews
+      } 
+    }), 
+    tap(console.log),
+    catchError(val => {
+      this.error$.next(val);
+      this.isLoading$.next(val);  
+      return of(null)
+    }),
+    retry(1),
+    tap(() => {
+      this.isLoading$.next(false)
     })
-  )  
+  );  	
 
 	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) {}
+   
 }
