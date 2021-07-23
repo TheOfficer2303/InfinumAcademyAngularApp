@@ -4,17 +4,20 @@ import { Observable } from 'rxjs';
 import { map, tap} from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { IShowResponse } from 'src/app/interfaces/showResponse.interface';
+import { environment } from 'src/environments/environment';
+import { ApiPaths } from '../auth/auth.service';
 import { Show } from './show.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShowService {
+  private baseURL = environment.baseUrl;
 
- constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   public getShows(): Observable<Array<Show>> {
-    return this.http.get<any>('https://tv-shows.infinum.academy/shows').pipe(
+    return this.http.get<any>(this.baseURL + ApiPaths.Shows).pipe(
       tap((response) => {
         console.log(response)
       }),
@@ -27,7 +30,7 @@ export class ShowService {
   }
 
   public getTopRatedShows(): Observable<Array<Show>> {
-    return this.http.get<any>('https://tv-shows.infinum.academy/shows/top_rated').pipe(
+    return this.http.get<any>(this.baseURL + ApiPaths.TopRatedShows).pipe(
       tap((response) => {
         console.log(response)
       }),
@@ -40,7 +43,7 @@ export class ShowService {
   }
 
   public getShowById(id: string | null): Observable<Show | null> {
-    return this.http.get<any>(`https://tv-shows.infinum.academy/shows/${id}`).pipe(
+    return this.http.get<any>(this.baseURL + ApiPaths.Shows + `/${id}`).pipe(
       tap((response) => {
         console.log(response)
       }),

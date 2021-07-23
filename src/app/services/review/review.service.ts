@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
-import { IReviewResponse } from 'src/app/interfaces/reviewsResponse.interface';
-import { Show } from '../show/show.model';
+import { environment } from 'src/environments/environment';
+import { ApiPaths } from '../auth/auth.service';
 import { Review } from './review.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
+  private baseURL = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
  
   public getReviewsOfShowId(showId: string | null): Observable<Array<Review>> {
-    return this.http.get<any>(`https://tv-shows.infinum.academy/shows/${showId}/reviews`).pipe(
+    return this.http.get<any>(this.baseURL + ApiPaths.Shows + `/${showId}/reviews`).pipe(
       tap((response) => {
         console.log(response)
       }),
