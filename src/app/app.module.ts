@@ -37,7 +37,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent],
 	imports: [HttpClientModule, BrowserModule, MatButtonModule,MatSnackBarModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
 	providers: [
-		
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
 		{
 		provide: HTTP_INTERCEPTORS,
 		useClass: AuthErrorInterceptor,
