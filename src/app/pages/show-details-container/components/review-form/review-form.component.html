@@ -1,0 +1,21 @@
+<mat-card>
+	<mat-card-title>Post review</mat-card-title>
+	<form [formGroup]="reviewForm">
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Comment</mat-label>
+			<textarea matInput formControlName="comment"></textarea>
+			<mat-error *ngIf="reviewForm.get('comment')?.errors?.required">Cannot be empty</mat-error>
+		</mat-form-field>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Rating</mat-label>
+			<input matInput type="number" formControlName="rating" placeholder="Rating" min="1" max="5">
+			<mat-error *ngIf="reviewForm.get('rating')?.errors?.required">Cannot be empty</mat-error>
+		</mat-form-field>
+	
+		<button mat-raised-button (click)="onPost()" [disabled]="reviewForm.invalid">Post</button>
+	</form>
+
+</mat-card>
+
