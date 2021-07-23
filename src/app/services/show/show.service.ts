@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map} from 'rxjs/operators'
+import { map, tap} from 'rxjs/operators'
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { IShowResponse } from 'src/app/interfaces/showResponse.interface';
 import { Show } from './show.model';
@@ -14,9 +14,12 @@ export class ShowService {
  constructor(private http: HttpClient) { }
 
   public getShows(): Observable<Array<Show>> {
-    return this.http.get<{ body: { showResponse: IShowResponse }}>('https://tv-shows.infinum.academy/shows').pipe(
+    return this.http.get<any>('https://tv-shows.infinum.academy/shows').pipe(
+      tap((response) => {
+        console.log(response)
+      }),
       map((response) => {
-        return response.body.showResponse.shows.map((rawShowData: IRawShow) => {
+        return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
         })
       })
@@ -24,9 +27,12 @@ export class ShowService {
   }
 
   public getTopRatedShows(): Observable<Array<Show>> {
-    return this.http.get<{ body: { showResponse: IShowResponse }}>('https://tv-shows.infinum.academy/shows').pipe(
+    return this.http.get<any>('https://tv-shows.infinum.academy/shows/top_rated').pipe(
+      tap((response) => {
+        console.log(response)
+      }),
       map((response) => {
-        return response.body.showResponse.shows.map((rawShowData: IRawShow) => {
+        return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
         })
       })
@@ -34,9 +40,12 @@ export class ShowService {
   }
 
   public getShowById(id: string | null): Observable<Show | null> {
-    return this.http.get<{ body: { post: IRawShow }}>(`https://tv-shows.infinum.academy/shows/${id}`).pipe(
+    return this.http.get<any>(`https://tv-shows.infinum.academy/shows/${id}`).pipe(
+      tap((response) => {
+        console.log(response)
+      }),
       map((response) => {
-        return new Show(response.body.post)
+        return new Show(response.show)
       })
     )
   }
