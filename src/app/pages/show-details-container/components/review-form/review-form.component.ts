@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface IReviewFormData {
   rating: number;
@@ -16,6 +16,9 @@ export interface IReviewFormData {
 })
 export class ReviewFormComponent {
   @Output() postReview: EventEmitter<IReviewFormData> = new EventEmitter();
+  public emptyStar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/1200px-Five-pointed_star.svg.png"
+  public filledStar = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Five_Pointed_Star_Solid.svg/1087px-Five_Pointed_Star_Solid.svg.png"
+
   public ratings = [
     { value: 1 },
     { value: 2 },
@@ -31,9 +34,6 @@ export class ReviewFormComponent {
     { id: 4, fill: false },
     { id: 5, fill: false }
   ])
-  
-  public emptyStar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/1200px-Five-pointed_star.svg.png"
-  public filledStar = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Five_Pointed_Star_Solid.svg/1087px-Five_Pointed_Star_Solid.svg.png"
 
   constructor(private fb: FormBuilder) { }
 
@@ -43,19 +43,20 @@ export class ReviewFormComponent {
   })
 
   public onPost() {
+    console.log("Forma", this.reviewForm.value)
     this.postReview.emit(this.reviewForm.value);
     this.reviewForm.reset()
   }
 
   public giveRating(rating: number) {
     let helperArray = [];
-    let filled = false;
+    let filled: boolean;
     for (let i = 1; i <= 5; i++) {
+      filled =  false;
       if (i <= rating) {
         filled = true
       }
       helperArray.push({id: i, fill: filled})
-      filled =  false;
     }
     this.filled$.next(helperArray)
   }
