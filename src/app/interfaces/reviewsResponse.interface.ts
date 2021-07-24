@@ -1,5 +1,5 @@
 import { IRawReview } from "./rawReview.interface";
 
-export interface IReviewResponse {
+export interface IReviewsResponse {
 	reviews: Array<IRawReview>
 }

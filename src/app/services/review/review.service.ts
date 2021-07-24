@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
+import { IReviewsResponse } from 'src/app/interfaces/reviewsResponse.interface';
 import { IReviewFormData } from 'src/app/pages/show-details-container/components/review-form/review-form.component';
 import { environment } from 'src/environments/environment';
 import { ApiPaths } from '../auth/auth.service';
@@ -17,7 +18,7 @@ export class ReviewService {
   constructor(private http: HttpClient) { }
  
   public getReviewsOfShowId(showId: string | null): Observable<Array<Review>> {
-    return this.http.get<any>(this.baseURL + ApiPaths.Shows + `/${showId}/reviews`).pipe(
+    return this.http.get<IReviewsResponse>(this.baseURL + ApiPaths.Shows + `/${showId}/reviews`).pipe(
       tap((response) => {
         console.log(response)
       }),
@@ -29,9 +30,9 @@ export class ReviewService {
     )
   }
 
-  public addReviewToShow(reviewData: IReviewFormData): Observable<IReviewFormData> {
+  public addReviewToShow(reviewData: IReviewFormData): Observable<Review> {
     console.log("im here")
-    return this.http.post<IReviewFormData>(this.baseURL + '/reviews', reviewData).pipe(
+    return this.http.post<Review>(this.baseURL + '/reviews', reviewData).pipe(
       tap(console.log)
     );
   }
