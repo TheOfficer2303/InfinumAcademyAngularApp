@@ -20,7 +20,7 @@ export class RegistrationContainerComponent {
 
   public onRegisterUser(userFormData: UserFormData) {
     this.isLoading$.next(true)
-    this.authService.registerUser(userFormData).pipe(
+    this.authService.register(userFormData).pipe(
       finalize(() => {
         this.isLoading$.next(false);
       }),

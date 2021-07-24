@@ -21,14 +21,14 @@ export enum ApiPaths {
 })
 export class AuthService {
   private readonly authDataKey = 'authData';
-  private baseURL = environment.baseUrl;
+  private baseUrl = environment.baseUrl;
 
   private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(Boolean(this.getAuthData()));
   public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
   
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  public registerUser(userFormData: UserFormData): Observable<any> {
+  public register(userFormData: UserFormData): Observable<any> {
     return this.authenticate(userFormData, ApiPaths.Register);
   }
 
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   public authenticate(data: LoginData | UserFormData, path: string): Observable<any> {
-    return this.http.post<IUserResponse>(this.baseURL + path, data, { observe: 'response' }).pipe(
+    return this.http.post<IUserResponse>(this.baseUrl + path, data, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
         console.log(response)
         const accessToken: string | null = response.headers.get('access-token') 

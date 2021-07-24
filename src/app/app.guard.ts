@@ -17,12 +17,11 @@ export class AppGuard implements CanActivate {
     return this.authService.isLoggedIn$.pipe(
       map((isLoggedIn: boolean) => {
         if (isLoggedIn) {
-          return isLoggedIn
+          return isLoggedIn;
         }
 
-        return this.router.parseUrl('/login')
+        return this.router.parseUrl('/login');
       })
     )
   }
-  
 }
