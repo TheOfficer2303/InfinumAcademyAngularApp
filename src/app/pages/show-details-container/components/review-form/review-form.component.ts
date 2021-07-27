@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface IReviewFormData {
   rating: number;
@@ -45,7 +46,14 @@ export class ReviewFormComponent {
   public onPost() {
     console.log("Forma", this.reviewForm.value)
     this.postReview.emit(this.reviewForm.value);
-    this.reviewForm.reset()
+    this.reviewForm.reset();
+    this.filled$.pipe(
+      map((array) => {
+        array.forEach(element => {
+          element.fill = false;
+        });
+      })
+    ).subscribe();
   }
 
   public giveRating(rating: number) {
