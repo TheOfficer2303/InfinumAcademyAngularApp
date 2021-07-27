@@ -10,9 +10,7 @@ import { AuthService } from './services/auth/auth.service';
 export class AppGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     return this.authService.isLoggedIn$.pipe(
       map((isLoggedIn: boolean) => {
