@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap} from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { IShowsResponse, ISingleShowResponse } from 'src/app/interfaces/showResponse.interface';
 import { environment } from 'src/environments/environment';
@@ -18,9 +18,6 @@ export class ShowService {
 
   public getShows(): Observable<Array<Show>> {
     return this.http.get<IShowsResponse>(this.baseURL + ApiPaths.Shows).pipe(
-      tap((response) => {
-        console.log(response)
-      }),
       map((response) => {
         return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
@@ -31,9 +28,6 @@ export class ShowService {
 
   public getTopRatedShows(): Observable<Array<Show>> {
     return this.http.get<IShowsResponse>(this.baseURL + ApiPaths.TopRatedShows).pipe(
-      tap((response) => {
-        console.log(response)
-      }),
       map((response) => {
         return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
@@ -44,11 +38,8 @@ export class ShowService {
 
   public getShowById(id: string | null): Observable<Show | null> {
     return this.http.get<ISingleShowResponse>(this.baseURL + ApiPaths.Shows + `/${id}`).pipe(
-      tap((response) => {
-        console.log(response)
-      }),
       map((response) => {
-        return new Show(response.show)
+        return new Show(response.show);
       })
     )
   }
