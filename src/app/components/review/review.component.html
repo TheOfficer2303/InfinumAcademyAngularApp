@@ -1,7 +1,15 @@
 <div class="review">
+	<img class="user-img" src="{{review.user.image_url}}" alt="">
+
+	{{review.user.email}}
+
+
 	{{ review.comment }}
-	<div>
+	<div class="rating">
 		<app-rating [averageRating]="review.rating"></app-rating>
+		<span *ngFor="let i of [].constructor(review.rating)">
+			<mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+		</span>
 	</div>
 	<ng-container *ngIf="review.user.email === uid">
 		<button (click)="delete(review.id)">Delete review</button>

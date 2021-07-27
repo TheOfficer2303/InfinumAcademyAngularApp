@@ -47,13 +47,6 @@ export class ReviewFormComponent {
     console.log("Forma", this.reviewForm.value)
     this.postReview.emit(this.reviewForm.value);
     this.reviewForm.reset();
-    this.filled$.pipe(
-      map((array) => {
-        array.forEach(element => {
-          element.fill = false;
-        });
-      })
-    ).subscribe();
   }
 
   public giveRating(rating: number) {
