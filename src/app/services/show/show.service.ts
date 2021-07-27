@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { IShowsResponse, ISingleShowResponse } from 'src/app/interfaces/showResponse.interface';
 import { environment } from 'src/environments/environment';
-import { ApiPaths } from '../auth/auth.service';
+import { ApiPaths } from 'src/app/enums/ApiPaths.enum';
 import { Show } from './show.model';
 
 @Injectable({

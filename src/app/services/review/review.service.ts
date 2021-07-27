@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ApiPaths } from 'src/app/enums/ApiPaths.enum';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
 import { IReviewsResponse } from 'src/app/interfaces/reviewsResponse.interface';
 import { IReviewFormData } from 'src/app/pages/show-details-container/components/review-form/review-form.component';
 import { environment } from 'src/environments/environment';
-import { ApiPaths } from '../auth/auth.service';
 import { Review } from './review.model';
 
 @Injectable({
