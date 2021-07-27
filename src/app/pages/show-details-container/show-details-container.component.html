@@ -4,8 +4,8 @@
 
 <ng-container *ngIf="(templateData$ | async) as template">
 	<app-show-detail [show]="template.show"></app-show-detail>
+	<app-review-form (postReview)="post($event)"></app-review-form>
 	<app-review-list [reviews]="template.reviews"></app-review-list>
-	<app-review-form (postReview)="post($event)" ></app-review-form>
 </ng-container>
 
 <div *ngIf="error$ | async as error">

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { catchError, finalize, map, retry, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
@@ -22,29 +22,39 @@ interface ITemplateData {
 export class ShowDetailsContainerComponent {
   public isLoading$ = new BehaviorSubject(true);
 	public error$ = new Subject<string>();
-  private id: string | null = '';
 
   private id$ = this.activatedRoute.paramMap.pipe(
-    switchMap((paramMap) => {
+    map((paramMap) => {
       const id: string | null = paramMap.get('id');
+      console.log("drugi id", id)
       if (id) {
         return id
       }
-      return of(null)
+      return null
     })
-  ).subscribe(id => {
-    if(id) {
-      this.id += id;
-    }
-  })
+  )
  
-  public templateData$: Observable<ITemplateData | null> = this.getData("")
+  public trigger$ = new BehaviorSubject<boolean>(true);
+  public templateData$: Observable<ITemplateData | null> = combineLatest([this.id$, this.trigger$]).pipe(
+    map(([id]) => {
+      return id;
+    }),
+    switchMap((id) => {
+      console.log(id)
+      if (id) {
+        return this.getData(id)
+      }
+      return of(null)
+    }),
+    tap(console.log)
+  )
+  
 
-  public getData(mess: string) {
-    console.log("fetching..." + mess)
+  public getData(id: string) {
+    console.log("fetching...")
     return combineLatest([
-      this.showService.getShowById(this.id),
-      this.reviewService.getReviewsOfShowId(this.id)
+      this.showService.getShowById(id),
+      this.reviewService.getReviewsOfShowId(id)
     ]).pipe(
       map(([show, reviews]) => {
         return {
@@ -66,23 +76,16 @@ export class ShowDetailsContainerComponent {
   }
 
   public post(reviewFormData: IReviewFormData) {
-    if (this.id) {
-      reviewFormData.show_id = this.id.toString();
-    }
+    reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id')
     
-    this.reviewService.addReviewToShow(reviewFormData).pipe(
-      finalize(() => {
-        this.templateData$ = this.getData("u finalize");
-      })
-    ).
+    this.reviewService.addReviewToShow(reviewFormData).pipe().
     subscribe(
-      (response) => {
-        console.log("response", response);
+      () => {
+        this.trigger$.next(true)
       }
     )
     console.log("ovo ide prije response")
-    this.templateData$ = this.getData("izvan finamonalize");
   }
 
-	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) {}
+	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
 }
