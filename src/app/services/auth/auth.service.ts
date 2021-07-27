@@ -30,13 +30,12 @@ export class AuthService {
     return this.authenticate(loginData, ApiPaths.Login);
   }
 
-  public authenticate(data: LoginData | UserFormData, path: string): Observable<any> {
+  private authenticate(data: LoginData | UserFormData, path: string): Observable<any> {
     return this.http.post<IUserResponse>(this.baseUrl + path, data, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
-        console.log(response)
-        const accessToken: string | null = response.headers.get('access-token') 
-        const client: string | null = response.headers.get('client') 
-        const uid: string | null = response.headers.get('uid') 
+        const accessToken: string | null = response.headers.get('access-token'); 
+        const client: string | null = response.headers.get('client'); 
+        const uid: string | null = response.headers.get('uid'); 
 
         if (client && accessToken && uid) {
           this.saveAuthData({ 'access-token': accessToken, client, uid });
