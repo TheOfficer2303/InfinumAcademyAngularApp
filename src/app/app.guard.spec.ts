@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppGuard } from './app.guard';
+import { AppGuard } from './guards/app.guard';
 
 describe('AppGuard', () => {
   let guard: AppGuard;
