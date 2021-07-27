@@ -25,12 +25,7 @@ export class ShowDetailsContainerComponent {
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
-      const id: string | null = paramMap.get('id');
-      console.log("drugi id", id)
-      if (id) {
-        return id
-      }
-      return null
+      return paramMap.get('id');
     })
   )
  
