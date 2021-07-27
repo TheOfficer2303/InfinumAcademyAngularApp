@@ -3,4 +3,7 @@
 	<div>
 		<app-rating [averageRating]="review.rating"></app-rating>
 	</div>
+	<ng-container *ngIf="review.user.email === uid">
+		<button (click)="delete(review.id)">Delete review</button>
+	</ng-container>
 </div>

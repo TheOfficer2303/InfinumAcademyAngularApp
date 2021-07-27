@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
@@ -87,5 +88,15 @@ export class ShowDetailsContainerComponent {
     console.log("ovo ide prije response")
   }
 
-	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
+  public delete(reviewId: string) {
+    this.reviewService.deleteReview(reviewId).pipe(
+      tap(() => console.log("u tapu"),)
+    ).subscribe((response) => {
+      this.trigger$.next(true);
+    });
+  }
+
+	constructor(private showService: ShowService, 
+              private activatedRoute: ActivatedRoute, 
+              private reviewService: ReviewService) { }
 }

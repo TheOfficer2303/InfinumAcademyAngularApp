@@ -31,9 +31,13 @@ export class ReviewService {
   }
 
   public addReviewToShow(reviewData: IReviewFormData): Observable<Review> {
-    console.log("im here")
     return this.http.post<Review>(this.baseURL + '/reviews', reviewData).pipe(
       tap(console.log)
     );
+  }
+
+  public deleteReview(id: string): Observable<Review> {
+    console.log("brišem...");
+    return this.http.delete<Review>(this.baseURL + '/reviews/' + id);
   }
 } 
