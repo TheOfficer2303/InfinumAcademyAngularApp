@@ -25,12 +25,7 @@ export class ShowDetailsContainerComponent {
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
-      const id: string | null = paramMap.get('id');
-      console.log("drugi id", id)
-      if (id) {
-        return id
-      }
-      return null
+      return paramMap.get('id');
     })
   )
  
@@ -40,18 +35,15 @@ export class ShowDetailsContainerComponent {
       return id;
     }),
     switchMap((id) => {
-      console.log(id)
       if (id) {
         return this.getData(id)
       }
-      return of(null)
-    }),
-    tap(console.log)
+      return of(null);
+    })
   )
   
 
   public getData(id: string) {
-    console.log("fetching...")
     return combineLatest([
       this.showService.getShowById(id),
       this.reviewService.getReviewsOfShowId(id)
@@ -62,11 +54,10 @@ export class ShowDetailsContainerComponent {
           reviews
         } 
       }), 
-      tap(console.log),
       catchError(val => {
         this.error$.next(val);
         this.isLoading$.next(val);  
-        return of(null)
+        return of(null);
       }),
       retry(1),
       tap(() => {
@@ -76,15 +67,14 @@ export class ShowDetailsContainerComponent {
   }
 
   public post(reviewFormData: IReviewFormData) {
-    reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id')
+    reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id');
     
     this.reviewService.addReviewToShow(reviewFormData).pipe().
     subscribe(
       () => {
-        this.trigger$.next(true)
+        this.trigger$.next(true);
       }
     )
-    console.log("ovo ide prije response")
   }
 
 	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
