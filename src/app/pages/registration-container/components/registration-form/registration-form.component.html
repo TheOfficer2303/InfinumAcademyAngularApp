@@ -1,0 +1,41 @@
+<mat-card>
+	<mat-card-title>Register new user</mat-card-title>
+	<form [formGroup]="registration">
+
+		<mat-form-field appearance="outline">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email">
+			<mat-icon matPrefix>person</mat-icon>
+			<mat-error *ngIf="registration.get('email')?.errors?.required else notEmpty">Cannot be empty</mat-error>
+			<ng-template #notEmpty>
+				<mat-error *ngIf="registration.get('email')?.errors?.email else letterCheckValidator">Hey! That's not an email!</mat-error>
+				<ng-template #letterCheckValidator>
+					<mat-error *ngIf="registration.get('email')?.errors?.onlyLetters">Please do not include special characters</mat-error>
+				</ng-template>
+			</ng-template>
+		</mat-form-field>
+
+		<div formGroupName="passwords">
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input matInput [type]="'password'" formControlName="password">
+				<mat-icon matPrefix>lock</mat-icon>
+				<mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.required">Cannot be empty</mat-error>
+				<mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.minlength">Password must be at least 8 characters long</mat-error>
+			</mat-form-field>
+	
+			<mat-form-field appearance="outline">
+				<mat-label>Confirm password</mat-label>
+				<input matInput [type]="'password'" formControlName="confirmPassword">
+				<mat-icon matPrefix>lock</mat-icon>
+				<mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.required">Cannot be empty</mat-error>
+			</mat-form-field>
+			<mat-error *ngIf="registration.get('passwords')?.errors?.notSame">
+				Passwords mismatch!
+			</mat-error>
+		</div>
+
+		<button mat-raised-button (click)="onRegister()" [disabled]="registration.invalid">Register</button>
+		<p>Already have an account? Go to <a [routerLink]="'/login'">login</a> page!</p>
+	</form>
+</mat-card>

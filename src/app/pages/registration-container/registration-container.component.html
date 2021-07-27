@@ -1,0 +1,5 @@
+<ng-container *ngIf="isLoading$ | async">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<app-registration-form (registerUser)="onRegisterUser($event)"></app-registration-form>
