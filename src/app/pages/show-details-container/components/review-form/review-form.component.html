@@ -10,22 +10,13 @@
 
 		<div>
 			Rating:
-			<ng-container *ngFor="let rating of ratings">
+			<ng-container *ngFor="let rating of (rating$ | async)">
 				<label>
-					<ng-container *ngFor="let filling of (filled$ | async)">
-							<span *ngIf="filling.id === rating.value">
-								<span *ngIf="!filling.fill else fillIt">
-									<img src="{{ emptyStar }}" alt="Empty star">
-								</span>
-
-								<ng-template #fillIt>
-									<img src="{{ filledStar }}" alt="Filled star">
-								</ng-template>
-							</span>
-					</ng-container>
-					<input (click)="giveRating(rating.value)" type="radio" formControlName="rating" class="hidden-radio" name="rating" [value]="rating.value">
+					<mat-icon class="star"> {{ rating.star }} </mat-icon>
+					<input (click)="giveRating(rating.value)" type="radio" formControlName="rating" class="hidden-radio" [value]="rating.value">
 				</label>
 			</ng-container>
+			<mat-error *ngIf="reviewForm.get('rating')?.errors?.required">Cannot be unselected</mat-error>
 		</div>
 			
 		<button mat-raised-button (click)="onPost()" [disabled]="reviewForm.invalid">Post</button>
