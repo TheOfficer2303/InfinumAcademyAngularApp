@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
@@ -26,12 +26,7 @@ export class ShowDetailsContainerComponent {
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
-      const id: string | null = paramMap.get('id');
-      console.log("drugi id", id)
-      if (id) {
-        return id
-      }
-      return null
+      return paramMap.get('id');
     })
   )
  
@@ -41,18 +36,15 @@ export class ShowDetailsContainerComponent {
       return id;
     }),
     switchMap((id) => {
-      console.log(id)
       if (id) {
         return this.getData(id)
       }
-      return of(null)
-    }),
-    tap(console.log)
+      return of(null);
+    })
   )
   
 
   public getData(id: string) {
-    console.log("fetching...")
     return combineLatest([
       this.showService.getShowById(id),
       this.reviewService.getReviewsOfShowId(id)
@@ -63,10 +55,9 @@ export class ShowDetailsContainerComponent {
           reviews
         } 
       }), 
-      tap(console.log),
       catchError(val => {
-        this.error$.next(val);
-        this.isLoading$.next(val);  
+        this.error$.next(val.message);
+        this.isLoading$.next(false);  
         return of(null)
       }),
       retry(1),
@@ -77,26 +68,15 @@ export class ShowDetailsContainerComponent {
   }
 
   public post(reviewFormData: IReviewFormData) {
-    reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id')
+    reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id');
     
     this.reviewService.addReviewToShow(reviewFormData).pipe().
     subscribe(
       () => {
-        this.trigger$.next(true)
+        this.trigger$.next(true);
       }
     )
-    console.log("ovo ide prije response")
   }
 
-  public delete(reviewId: string) {
-    this.reviewService.deleteReview(reviewId).pipe(
-      tap(() => console.log("u tapu"),)
-    ).subscribe((response) => {
-      this.trigger$.next(true);
-    });
-  }
-
-	constructor(private showService: ShowService, 
-              private activatedRoute: ActivatedRoute, 
-              private reviewService: ReviewService) { }
+	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
 }

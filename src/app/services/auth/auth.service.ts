@@ -2,19 +2,13 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ApiPaths } from 'src/app/enums/ApiPaths.enum';
 import { AuthData } from 'src/app/interfaces/auth-data.interface';
 import { IUserResponse } from 'src/app/interfaces/userResponse.interface';
 import { LoginData } from 'src/app/pages/login-container/login-form/login-form.component';
 import { UserFormData } from 'src/app/pages/registration-container/components/registration-form/registration-form.component';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
-
-export enum ApiPaths {
-  Register = '/users',
-  Login = '/users/sign_in',
-  Shows = '/shows',
-  TopRatedShows = '/shows/top_rated'
-}
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +30,12 @@ export class AuthService {
     return this.authenticate(loginData, ApiPaths.Login);
   }
 
-  public authenticate(data: LoginData | UserFormData, path: string): Observable<any> {
+  private authenticate(data: LoginData | UserFormData, path: string): Observable<any> {
     return this.http.post<IUserResponse>(this.baseUrl + path, data, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
-        console.log(response)
-        const accessToken: string | null = response.headers.get('access-token') 
-        const client: string | null = response.headers.get('client') 
-        const uid: string | null = response.headers.get('uid') 
+        const accessToken: string | null = response.headers.get('access-token'); 
+        const client: string | null = response.headers.get('client'); 
+        const uid: string | null = response.headers.get('uid'); 
 
         if (client && accessToken && uid) {
           this.saveAuthData({ 'access-token': accessToken, client, uid });

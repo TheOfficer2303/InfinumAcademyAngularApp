@@ -7,3 +7,9 @@ export interface IRawReview {
 	comment: string
 	user: IRawUser
 }
+
+export interface IReviewFormData {
+  rating: number;
+  comment: string;
+  show_id: string | null;
+}
