@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
@@ -55,9 +55,9 @@ export class ShowDetailsContainerComponent {
         } 
       }), 
       catchError(val => {
-        this.error$.next(val);
-        this.isLoading$.next(val);  
-        return of(null);
+        this.error$.next(val.message);
+        this.isLoading$.next(false);  
+        return of(null)
       }),
       retry(1),
       tap(() => {
