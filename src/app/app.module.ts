@@ -35,9 +35,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReviewFormComponent } from './pages/show-details-container/components/review-form/review-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
-	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent, ReviewFormComponent],
+	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent, ReviewFormComponent, LogoComponent],
 	imports: [MatFormFieldModule, HttpClientModule, BrowserModule, MatRadioModule, MatButtonModule,MatSnackBarModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
 	providers: [
 		{
