@@ -1,70 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { ApiPaths } from 'src/app/enums/ApiPaths.enum';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
+import { IReviewsResponse } from 'src/app/interfaces/reviewsResponse.interface';
+import { IReviewFormData } from 'src/app/pages/show-details-container/components/review-form/review-form.component';
+import { environment } from 'src/environments/environment';
 import { Review } from './review.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
+  private baseURL = environment.baseUrl;
 
-  private mockData: Array<IRawReview> = [
-    {
-      id: '1',
-      showId: '1',
-      rating: 5,
-      comment: 'Good one!'
-    },
-    {
-      id: '2',
-      showId: '2',
-      rating: 5,
-      comment: 'Good!'
-    },
-    {
-      id: '3',
-      showId: '3',
-      rating: 5,
-      comment: 'Good 1!'
-    },
-    {
-      id: '4',
-      showId: '2',
-      rating: 5,
-      comment: 'Good show!'
-    },
-    {
-      id: '5',
-      showId: '3',
-      rating: 1,
-      comment: 'Bad show!'
-    },
-    {
-      id: '6',
-      showId: '4',
-      rating: 5,
-      comment: 'Very nice one!'
-    },
-    {
-      id: '7',
-      showId: '4',
-      rating: 3,
-      comment: 'Meh!'
-    }
-  ]
-
-  private get reviews(): Array<Review> {
-    return this.mockData.map((review: IRawReview) => {
-      return new Review(review);
-    })
-  }
-
-  public getReviews(): Observable<Array<Review>> {
-    return of(this.reviews).pipe(delay(1000 + Math.random() * 1000));
-  }
-
+  constructor(private http: HttpClient) { }
+ 
   public getReviewsOfShowId(showId: string | null): Observable<Array<Review>> {
-    return this.getReviews().pipe(map((reviews: Array<Review>) => reviews.filter((review: Review) => review.showId === showId)));
-  } 
-}
+    return this.http.get<IReviewsResponse>(this.baseURL + ApiPaths.Shows + `/${showId}` + ApiPaths.Reviews).pipe(
+      map((response) => {
+        return response.reviews.map((review: IRawReview) => {
+          return new Review(review);
+        })
+      })
+    )
+  }
+
+  public addReviewToShow(reviewData: IReviewFormData): Observable<Review> {
+    return this.http.post<Review>(this.baseURL + ApiPaths.Reviews, reviewData);
+  }
+} 

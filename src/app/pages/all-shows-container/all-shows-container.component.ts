@@ -18,7 +18,6 @@ export class AllShowsContainerComponent {
 	public shows$: Observable <Array<Show>> = this.showService.getShows()
 		.pipe(
 			catchError(val => {
-				console.log(val);
 				this.error$.next(val);
 				return of([])
 			}), 

@@ -1,0 +1,14 @@
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+.hidden-radio {
+	width: 0;
+	opacity: 0;
+}
+
+.star {
+	width: 20px;
+	cursor: pointer;
+}

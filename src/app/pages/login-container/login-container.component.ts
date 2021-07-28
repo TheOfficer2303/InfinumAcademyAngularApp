@@ -21,7 +21,7 @@ export class LoginContainerComponent {
 
   public onLogin(loginData: LoginData) {
     this.isLoading$.next(true);
-    this.authService.loginUser(loginData).pipe(
+    this.authService.logIn(loginData).pipe(
       finalize(() => {
         this.isLoading$.next(false)
       })
