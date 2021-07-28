@@ -10,8 +10,9 @@
 	<app-show-detail class="card" [show]="template.show"></app-show-detail>
 	<div class="reviews">
 		<span>Reviews</span>
-		<div class="review-list">
+		<div class="review-input-list">
 			<app-review-form (postReview)="post($event)"></app-review-form>
+				
 			<app-review-list (deleteReview)="delete($event)" [reviews]="template.reviews"></app-review-list>
 		</div>
 	</div>
