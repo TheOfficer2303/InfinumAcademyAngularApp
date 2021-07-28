@@ -17,6 +17,10 @@ export class SideNavComponent {
    {
      url: 'top-rated',
      title: 'Top Rated'
+    },
+    {
+      url:'my-profile',
+      title: 'My profile'
     }
   ]
 

@@ -1,3 +1,5 @@
+@use 'src/app/styles/utils/colors';
+
 :host {
 	display: block;
 	width: 100%;
@@ -21,9 +23,24 @@
 }
 
 .info {
+	margin: 0;
 	flex: 1;
 	padding: 16px 16px 12px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	background-color: colors.$white;
+	color: colors.$purple;
+
+	text-decoration: none;
+}
+
+.title {
+	font-size: 20px;
+}
+
+.rating {
+	display: flex;
+	flex-direction: row;
 }

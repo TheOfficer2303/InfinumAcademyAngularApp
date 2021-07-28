@@ -1,5 +1,5 @@
 <ng-container *ngFor="let show of shows">
-<a [routerLink]="['/show', show.id]">
+<a class="link" [routerLink]="['/show', show.id]">
 	<app-show-card
 	[show]="show"
   ></app-show-card>

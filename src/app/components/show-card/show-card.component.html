@@ -2,8 +2,11 @@
   <img mat-card-image [src]="show.imageUrl" alt="" class="show-image">
   <div class="info">
     <mat-card-header>
-      <mat-card-title>{{ show.title }}</mat-card-title>
+      <mat-card-title  class="title">{{ show.title }}</mat-card-title>
     </mat-card-header>
-    <app-rating [averageRating]="show.averageRating"></app-rating>
+    <div class="rating">
+      <mat-icon>star</mat-icon>
+      <app-rating [averageRating]="show.averageRating"></app-rating>
+    </div>
   </div>
 </mat-card>
