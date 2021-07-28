@@ -1,12 +1,23 @@
-ul {
+@use 'src/app/styles/utils/colors';
+
+.list {
 	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+
+	.item {
+		margin-bottom: 24px;
+	}
 }
 
-a {
-	text-decoration: none;
-	font-size: 18px;
-}
+.link {
+	padding: 8px 12px;
+	color: colors.$white;
 
-.active {
-	color: red;
+	&.active{
+		background-color: colors.$purple;
+	}
 }
