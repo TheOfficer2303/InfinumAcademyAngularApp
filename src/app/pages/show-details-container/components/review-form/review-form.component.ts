@@ -18,14 +18,16 @@ export interface IReviewFormData {
 export class ReviewFormComponent {
   @Output() postReview: EventEmitter<IReviewFormData> = new EventEmitter();
 
-  public rating$ = new BehaviorSubject([
-    { value: 1, star: "star_outline" }, 
-    { value: 2, star: "star_outline" },
-    { value: 3, star: "star_outline" },
-    { value: 4, star: "star_outline" },
-    { value: 5, star: "star_outline" }
-  ])
-  public currentRating$: BehaviorSubject<number> = new BehaviorSubject(1);
+  private defaultStars = [
+    { value: 1, star: 'star_outline' },
+    { value: 2, star: 'star_outline' },
+    { value: 3, star: 'star_outline' },
+    { value: 4, star: 'star_outline' },
+    { value: 5, star: 'star_outline' },
+  ];
+
+  public rating$ = new BehaviorSubject(this.defaultStars);
+  private currentRating$: BehaviorSubject<number> = new BehaviorSubject(1);
 
   constructor(private fb: FormBuilder) { }
 
@@ -37,13 +39,14 @@ export class ReviewFormComponent {
   public onPost() {
     this.postReview.emit(this.reviewForm.value);
     this.reviewForm.reset();
+    this.rating$.next(this.defaultStars);
   }
 
   public giveRating(rating: number) {
-    this.currentRating$.next(rating)
+    this.currentRating$.next(rating);
     for (let i = 0; i < this.rating$.value.length; i++) {
       if (this.rating$.value[i].value <= this.currentRating$.value) {
-        this.rating$.value[i].star = "star"
+        this.rating$.value[i].star = "star";
       } else {
         this.rating$.value[i].star = "star_outline"
       }
