@@ -70,12 +70,18 @@ export class ShowDetailsContainerComponent {
   public post(reviewFormData: IReviewFormData) {
     reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id');
     
-    this.reviewService.addReviewToShow(reviewFormData).pipe().
-    subscribe(
-      () => {
+    this.reviewService.addReviewToShow(reviewFormData).
+    subscribe(() => {
         this.trigger$.next(true);
       }
     )
+  }
+
+  public delete(id: string) {
+    this.reviewService.deleteReview(id).
+    subscribe(() => {
+      this.trigger$.next(true);
+    })
   }
 
 	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }

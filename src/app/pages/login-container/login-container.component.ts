@@ -30,7 +30,6 @@ export class LoginContainerComponent {
         this.router.navigate(['']);
       } 
     }, (errResponse: HttpErrorResponse) => {
-      console.log(errResponse)
       this.snackBar.open(errResponse.error.errors, 'Close', {
         duration: 3500
       })

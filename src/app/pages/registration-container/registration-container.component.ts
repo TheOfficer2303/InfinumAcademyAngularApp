@@ -23,13 +23,11 @@ export class RegistrationContainerComponent {
     this.authService.register(userFormData).pipe(
       finalize(() => {
         this.isLoading$.next(false);
-      }),
-      tap(console.log)
+      })
     )
     .subscribe((userData: UserFormData) => {
       this.router.navigate(['']);
     }, (errResponse: HttpErrorResponse) => {
-      console.log(errResponse)
       this.snackBar.open(errResponse.error.errors[0], 'Close', {
         duration: 3500
       })
