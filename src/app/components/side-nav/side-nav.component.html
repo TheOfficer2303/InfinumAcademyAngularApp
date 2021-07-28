@@ -3,5 +3,5 @@
 		<a class="link" [routerLink]="link.url" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">{{ link.title }}</a>
 	</li>
 
-	<button mat-button (click)="logOut()">Logout</button>
+	<button mat-raised-button color="primary" (click)="logOut()">Logout</button>
 </ul>

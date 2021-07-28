@@ -16,6 +16,8 @@
 .link {
 	padding: 8px 12px;
 	color: colors.$white;
+	text-decoration: none;
+	border-radius: 32px;
 
 	&.active{
 		background-color: colors.$purple;
