@@ -7,7 +7,12 @@
 </div>
 
 <ng-container *ngIf="(templateData$ | async) as template">
-	<app-show-detail [show]="template.show"></app-show-detail>
-	<app-review-form (postReview)="post($event)"></app-review-form>
-	<app-review-list (deleteReview)="delete($event)" [reviews]="template.reviews"></app-review-list>
+	<app-show-detail class="card" [show]="template.show"></app-show-detail>
+	<div class="reviews">
+		<span>Reviews</span>
+		<div class="review-list">
+			<app-review-form (postReview)="post($event)"></app-review-form>
+			<app-review-list (deleteReview)="delete($event)" [reviews]="template.reviews"></app-review-list>
+		</div>
+	</div>
 </ng-container>

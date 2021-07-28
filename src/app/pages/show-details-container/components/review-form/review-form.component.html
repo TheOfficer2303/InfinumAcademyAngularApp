@@ -1,26 +1,30 @@
-<mat-card>
-	<mat-card-title>Post review</mat-card-title>
+<div class="card" color="primary">
 	<form [formGroup]="reviewForm">
 	
-		<mat-form-field appearance="outline">
-			<mat-label>Comment</mat-label>
-			<textarea matInput formControlName="comment"></textarea>
+		<mat-form-field class="comment" appearance="outline">
+			<mat-label>Enter review</mat-label>
+			<textarea matInput formControlName="comment" color="accent"></textarea>
 			<mat-error *ngIf="reviewForm.get('comment')?.errors?.required">Cannot be empty</mat-error>
 		</mat-form-field>
 
-		<div>
-			Rating:
-			<ng-container *ngFor="let rating of (rating$ | async)">
-				<label>
-					<mat-icon class="star"> {{ rating.star }} </mat-icon>
-					<input (click)="giveRating(rating.value)" type="radio" formControlName="rating" class="hidden-radio" [value]="rating.value">
-				</label>
-			</ng-container>
-			<mat-error *ngIf="reviewForm.get('rating')?.errors?.required">Cannot be unselected</mat-error>
-		</div>
-			
-		<button mat-raised-button (click)="onPost()" [disabled]="reviewForm.invalid">Post</button>
-	</form>
+		<div class="post">
+			<div class="star-post">
+				<div class="stars">
 
-</mat-card>
+					<div class="text-stars">
+						<span class="rating-text">Rating</span>
+						<ng-container *ngFor="let rating of (rating$ | async)">
+							<label>
+								<mat-icon class="star"> {{ rating.star }} </mat-icon>
+								<input (click)="giveRating(rating.value)" type="radio" formControlName="rating" class="hidden-radio" [value]="rating.value">
+							</label>
+						</ng-container>
+					</div>
+					<mat-error *ngIf="reviewForm.get('rating')?.errors?.required">Cannot be unselected</mat-error>
+				</div>
+				<button mat-raised-button color="primary" class="button" (click)="onPost()" [disabled]="reviewForm.invalid">Post</button>
+			</div>	
+		</div>
+	</form>
+</div>
 
