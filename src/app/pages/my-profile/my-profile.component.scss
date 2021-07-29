@@ -1,0 +1,42 @@
+@use 'src/app/styles/utils/colors';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.email {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	margin-bottom: 30px;
+}
+
+.dropzone {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 500px;
+	height: 400px;
+
+	background-color: rgba(141, 92, 230, 0.15);
+	border: 2px dashed #371687;
+	border-radius: 24px;
+}
+
+@media screen and (max-width:768px) {
+	.container {
+		padding: 20px;
+	}
+
+	.dropzone {
+		width: 100%;
+	}
+}
