@@ -10,8 +10,12 @@
 }
 
 @media screen and (max-width: 768px) {
-	
 	.reviews {
+		margin-top: 20px;
 		flex-direction: column;
+	}
+
+	.review-input-list {
+		width: 100%;
 	}
 }

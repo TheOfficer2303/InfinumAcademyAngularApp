@@ -29,7 +29,6 @@
 
 .button {
 	color: colors.$purple;
-	// background-color: colors.$white;
 }
 
 ::ng-deep .menu {
@@ -51,7 +50,23 @@
 
 @media screen and (max-width: 768px) {
 	
+	* {
+		font-size: 12px;
+	}
+
 	.review {
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 45px 1fr;
+		justify-items: stretch;
+	}
+
+	.rating {
+		justify-content: flex-start;
+	}
+
+	.comment {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		width: 100%;
 	}
 }

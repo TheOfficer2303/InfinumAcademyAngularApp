@@ -8,7 +8,7 @@
 
 <div class="card">
 	<ng-container *ngIf="(templateData$ | async) as template">
-		<app-show-detail [show]="template.show"></app-show-detail>
+		<app-show-detail class="show" [show]="template.show"></app-show-detail>
 		<div class="reviews">
 			<span>Reviews</span>
 			<div class="review-input-list">
