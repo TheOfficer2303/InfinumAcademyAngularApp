@@ -29,7 +29,13 @@
 
 .button {
 	color: colors.$purple;
+	// background-color: colors.$white;
+}
+
+::ng-deep .menu {
 	background-color: colors.$white;
+	padding: 10px;
+	border-radius: 24px;
 }
 
 .rating {
@@ -41,4 +47,11 @@
 	width: 40px;
 	height: 40px;
 	border-radius: 100%;
+}
+
+@media screen and (max-width: 768px) {
+	
+	.review {
+		flex-direction: column;
+	}
 }

@@ -3,7 +3,7 @@
 	
 		<mat-form-field class="comment" appearance="outline">
 			<mat-label>Enter review</mat-label>
-			<textarea matInput formControlName="comment" color="accent"></textarea>
+			<textarea matInput formControlName="comment"></textarea>
 			<mat-error *ngIf="reviewForm.get('comment')?.errors?.required">Cannot be empty</mat-error>
 		</mat-form-field>
 

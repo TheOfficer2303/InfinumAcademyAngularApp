@@ -24,7 +24,7 @@
 		
 		<mat-menu #menu class="menu">
 			<ng-container *ngIf="review.user.email === uid">
-				<button mat-icon-button class="button" color="primary" (click)="delete(review.id)">Delete review</button>
+				<button mat-icon-button class="button" (click)="delete(review.id)">DELETE</button>
 			</ng-container>
 		</mat-menu>
 	</div>
