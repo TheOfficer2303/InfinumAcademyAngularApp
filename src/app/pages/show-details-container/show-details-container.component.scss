@@ -8,3 +8,10 @@
 .review-input-list {
 	width: 85%;
 }
+
+@media screen and (max-width: 768px) {
+	
+	.reviews {
+		flex-direction: column;
+	}
+}
