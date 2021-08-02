@@ -1,8 +1,16 @@
 <div class="review">
-	<img class="user-img" src="{{review.user.image_url}}" alt="">
+	<ng-container *ngIf="review.user.image_url else noImage">
+		<img class="user-img" src="{{review.user.image_url}}" alt="User image">
+	</ng-container>
+
+	<ng-template #noImage>
+		<div class="acc-icon">
+			<mat-icon class="icon">account_circle</mat-icon>
+		</div>
+	</ng-template>
 
 	<div class="email-rating">
-		{{review.user.email}}
+		<span class="email">{{ review.user.email }}</span>
 		<div class="rating">
 			<app-rating [averageRating]="review.rating"></app-rating>
 			<span class="star" *ngFor="let i of [].constructor(review.rating)">

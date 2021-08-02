@@ -12,9 +12,15 @@
 	opacity: 0;
 }
 
+.rating-text {
+	font-size: 20px;
+	margin-right: 12px;
+}
+
 .star {
 	width: 20px;
 	cursor: pointer;
+	color: colors.$light-purple;
 }
 
 .comment {

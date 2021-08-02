@@ -30,6 +30,8 @@
 	flex-direction: column;
 	justify-content: space-between;
 
+	box-sizing: initial;
+
 	background-color: colors.$white;
 	color: colors.$purple;
 
@@ -43,4 +45,8 @@
 .rating {
 	display: flex;
 	flex-direction: row;
+}
+
+.mat-card-image {
+	margin: 0px;
 }
