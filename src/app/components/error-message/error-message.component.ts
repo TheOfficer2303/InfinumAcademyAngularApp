@@ -9,5 +9,4 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class ErrorMessageComponent {
   @Input() error:string;
 
-  constructor() { }
 }
