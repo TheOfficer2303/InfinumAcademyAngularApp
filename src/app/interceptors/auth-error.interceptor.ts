@@ -9,19 +9,27 @@ import {
 } from '@angular/common/http';
 import { EMPTY, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403) {
+      catchError((errResponse: HttpErrorResponse) => {
+        this.snackBar.open(errResponse.error.errors[0], 'Close', {
+          duration: 3500
+        })
+
+        if (errResponse.status === 401 || errResponse.status === 403) {
           this.router.navigate(['/login']);
           return EMPTY;
+        } else if (errResponse.status === 422) {
+          this.router.navigate(['/register']);
+          return EMPTY;
         }
-        return throwError(error);
+        return throwError(errResponse);
       })
     );
   }
