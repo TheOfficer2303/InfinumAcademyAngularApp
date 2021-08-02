@@ -17,7 +17,7 @@ export class ShowService {
   constructor(private http: HttpClient) { }
 
   public getShows(): Observable<Array<Show>> {
-    return this.http.get<IShowsResponse>(this.baseURL + ApiPaths.Shows).pipe(
+    return this.http.get<IShowsResponse>(`${this.baseURL}${ApiPaths.Shows}`).pipe(
       map((response) => {
         return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
@@ -27,7 +27,7 @@ export class ShowService {
   }
 
   public getTopRatedShows(): Observable<Array<Show>> {
-    return this.http.get<IShowsResponse>(this.baseURL + ApiPaths.TopRatedShows).pipe(
+    return this.http.get<IShowsResponse>(`${this.baseURL}${ApiPaths.TopRatedShows}`).pipe(
       map((response) => {
         return response.shows.map((rawShowData: IRawShow) => {
           return new Show(rawShowData);
@@ -37,7 +37,7 @@ export class ShowService {
   }
 
   public getShowById(id: string | null): Observable<Show | null> {
-    return this.http.get<ISingleShowResponse>(this.baseURL + ApiPaths.Shows + `/${id}`).pipe(
+    return this.http.get<ISingleShowResponse>(`${this.baseURL}${ApiPaths.Shows}/${id}`).pipe(
       map((response) => {
         return new Show(response.show);
       })
