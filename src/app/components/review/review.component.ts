@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
-import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-review',
@@ -11,10 +11,10 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class ReviewComponent {  
   @Input() review: Review;
   @Output() deleteReview: EventEmitter<string> = new EventEmitter();
-  public uid = this.storageService.get("authData").uid;
+  public uid = this.authService.getAuthData()?.uid;
  
   public delete(id: string) {
     this.deleteReview.emit(id)
   }
-  constructor(private storageService: StorageService) { }
+  constructor(private authService: AuthService) { }
 }

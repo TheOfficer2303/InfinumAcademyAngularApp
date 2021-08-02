@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -8,8 +8,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyProfileComponent {
-  public email = this.storageService.get("authData").uid
+  public email = this.authService.getAuthData()?.uid
 
-  constructor(private storageService: StorageService) { }
-
+  constructor(private authService: AuthService) { }
 }
