@@ -14,7 +14,7 @@
 		<div class="rating">
 			<app-rating [averageRating]="review.rating"></app-rating>
 			<span class="star" *ngFor="let i of [].constructor(review.rating)">
-				<mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+				<mat-icon aria-hidden="false" aria-label="Rating star icon">star</mat-icon>
 			</span>
 		</div>
 	</div>
@@ -31,10 +31,7 @@
 		</ng-container>
 		
 		<mat-menu #menu class="menu">
-			<ng-container *ngIf="review.user.email === uid">
-				<button mat-icon-button class="button" (click)="delete(review.id)">DELETE</button>
-			</ng-container>
+			<button mat-icon-button class="button" (click)="delete(review.id)">DELETE</button>
 		</mat-menu>
 	</div>
-
 </div>

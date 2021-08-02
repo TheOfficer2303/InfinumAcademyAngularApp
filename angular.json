@@ -91,7 +91,7 @@
 						"karmaConfig": "karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": ["src/favicon.ico", "src/assets"],
-						"styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.scss"],
+						"styles": ["src/app/styles/themes/purple-rain.scss", "src/app/styles/main.scss"],
 						"stylePreprocessorOptions": {
 							"includePaths": ["src/app/styles"]
 						},
