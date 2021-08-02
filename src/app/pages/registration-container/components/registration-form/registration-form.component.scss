@@ -9,10 +9,15 @@
 }
 
 .form {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 50px;
+}
+
+.field {
+	width: 100%;
 }
 
 .logo {
@@ -20,6 +25,7 @@
 }
 
 .passwords {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
