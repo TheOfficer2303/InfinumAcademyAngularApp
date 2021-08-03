@@ -24,7 +24,7 @@
 	justify-content: center;
 	align-items: center;
 
-	width: 500px;
+	width: 600px;
 	height: 400px;
 
 	background-color: colors.$purple;
@@ -34,11 +34,11 @@
 
 @media screen and (max-width:breakpoints.$Small) {
 	.container {
-		background-color: wheat;
 		padding: 20px;
 	}
 
 	.dropzone {
-		width: 100%;
+		width: 270px;
+		height: 270px;
 	}
 }
