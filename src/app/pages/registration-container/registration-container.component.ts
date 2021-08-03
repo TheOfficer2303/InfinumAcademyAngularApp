@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -25,6 +26,8 @@ export class RegistrationContainerComponent {
     )
     .subscribe((userData: UserFormData) => {
       this.router.navigate(['']);
+    }, (errResponse: HttpErrorResponse) => {
+      this.router.navigate(['/register'])
     })
   }
 }
