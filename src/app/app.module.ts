@@ -38,10 +38,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import { LogoComponent } from './components/logo/logo.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
-import { ImgUploadComponent } from './pages/my-profile/components/img-upload/img-upload.component';
 
 @NgModule({
-	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent, ReviewFormComponent, LogoComponent, MyProfileComponent, ImgUploadComponent],
+	declarations: [AppComponent, MainLayoutComponent, SideNavComponent, AllShowsContainerComponent, ShowListComponent, ShowListComponent, ShowCardComponent, RatingComponent, TopRatedContainerComponent, ShowDetailsContainerComponent, ShowDetailComponent, ErrorMessageComponent, ReviewListComponent, ReviewComponent, RegistrationContainerComponent, RegistrationFormComponent, AuthLayoutComponent, LoginContainerComponent, LoginFormComponent, ReviewFormComponent, LogoComponent, MyProfileComponent],
 	imports: [MatMenuModule, MatFormFieldModule, HttpClientModule, BrowserModule, MatRadioModule, MatButtonModule,MatSnackBarModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, MatProgressBarModule, AppRoutingModule, MatInputModule],
 	providers: [
 		{
