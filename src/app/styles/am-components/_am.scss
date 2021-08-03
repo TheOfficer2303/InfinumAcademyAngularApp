@@ -1,13 +1,7 @@
-@use 'src/app/styles/utils/colors';
+@use 'utils/colors';
 
 .mat-menu-panel.menu {
 	background-color: colors.$white;
 	padding: 10px;
 	border-radius: 24px;
 }
-
-// .mat-form-field-outline{
-// 	color: purple;
-// 	background-color: black;
-// 	border-radius: 24px;
-// }

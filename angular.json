@@ -29,6 +29,9 @@
 						"inlineStyleLanguage": "scss",
 						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": ["src/app/styles/themes/purple-rain.scss", "src/app/styles/main.scss"],
+						"stylePreprocessorOptions": {
+							"includePaths": ["src/app/styles"]
+						},
 						"scripts": []
 					},
 					"configurations": {

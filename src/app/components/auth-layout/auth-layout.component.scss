@@ -1,4 +1,5 @@
-@use 'src/app/styles/utils/colors';
+@use 'utils/colors';
+@use 'utils/breakpoints';
 
 :host {
 	display: flex;
@@ -8,7 +9,7 @@
 	background-color: colors.$dark-purple;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:breakpoints.$Small) {
 	:host {
 		background-color: colors.$purple;
 	}

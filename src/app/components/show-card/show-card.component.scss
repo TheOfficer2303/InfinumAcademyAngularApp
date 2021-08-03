@@ -1,4 +1,4 @@
-@use 'src/app/styles/utils/colors';
+@use 'utils/colors';
 
 :host {
 	display: block;
@@ -21,7 +21,6 @@
 	height: 300px;
 	object-fit: cover;
 }
-
 
 .info {
 	height: 100%;

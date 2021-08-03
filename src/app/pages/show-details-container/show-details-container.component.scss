@@ -1,3 +1,5 @@
+@use 'utils/breakpoints';
+
 .reviews {
 	display: flex;
 	margin-top: 100px;
@@ -9,7 +11,7 @@
 	width: 85%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: breakpoints.$Small) {
 	.reviews {
 		margin-top: 20px;
 		flex-direction: column;
