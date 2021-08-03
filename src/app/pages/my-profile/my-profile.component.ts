@@ -23,6 +23,11 @@ export class MyProfileComponent {
 
   public onDrop(files: FileList) {
     if (files && files[0]) {
+      if (!files[0].name.endsWith(".jpg") && !files[0].name.endsWith(".jpeg") && !files[0].name.endsWith(".png")) {
+        this.snackBar.open("Please upload .jpg, .jpeg or .png file", 'OK');
+        return;
+      }
+
       this.image = files[0];
 
       const reader = new FileReader();
@@ -42,7 +47,7 @@ export class MyProfileComponent {
   		error: (errResponse: HttpErrorResponse) => {
   			this.snackBar.open(errResponse.error.errors.full_messages[0], 'Close', {
   				duration: 3500
-  			})
+  			});
   		}
   	})
   };
