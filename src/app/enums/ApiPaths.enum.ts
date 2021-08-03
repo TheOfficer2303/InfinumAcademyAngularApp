@@ -3,5 +3,6 @@ export enum ApiPaths {
   Login = '/users/sign_in',
   Shows = '/shows',
   TopRatedShows = '/shows/top_rated',
-	Reviews = '/reviews'
+	Reviews = '/reviews',
+  Users = '/users'
 }
