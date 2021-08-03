@@ -33,7 +33,7 @@
 }
 
 .drop-text {
-	margin-top: 20px;
+	margin: 20px 0px;
 	color: colors.$light-purple;
 	font-size: 24px;
 	font-weight: 700;
@@ -44,6 +44,11 @@
 	height: 240px;
 	border-radius: 100%;
 	object-fit: cover;
+}
+
+.file-input {
+	opacity: 0;
+	width: 0;
 }
 
 @media screen and (max-width:breakpoints.$Small) {

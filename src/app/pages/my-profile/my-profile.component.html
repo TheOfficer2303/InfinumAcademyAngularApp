@@ -4,15 +4,26 @@
 		<span>{{ email }}</span>
 	</div>
 
-	<div class="dropzone">
-		<div>
-			<img  [ngClass]="{'image': image}" [src]="(imageUrl$ | async) || 'assets/images/no_image.svg'" alt="">
-		</div>
-		<div class="drop-text">Drop your photo here</div>
-		<input type="file" class="file-input" (change)="onFileSelected($event)">
-
-		<ng-container *ngIf="image">
-			<button mat-raised-button (click)="upload()" color="primary">Upload</button>
-		</ng-container>
-	</div>
+	<form>
+		<label for="image">
+			<div class="dropzone"
+			dragndrop
+			(dropped)="onDrop($event)">
+				<div>
+					<img  [ngClass]="{'image': image}" [src]="(imageUrl$ | async) || 'assets/images/no_image.svg'" alt="">
+				</div>
+				
+				<div class="drop-text">
+					Drop your photo here
+				</div>
+				
+				<ng-container *ngIf="(imageUrl$ | async) !== '' ">
+					<button mat-raised-button (click)="upload()" color="primary">Upload</button>
+				</ng-container>
+			</div>
+		</label>
+	
+		<input type="file" id="image" name="image" class="file-input">
+	</form>
+	
 </div>
