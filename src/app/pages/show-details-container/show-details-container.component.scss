@@ -1,0 +1,23 @@
+@use 'utils/breakpoints';
+
+.reviews {
+	display: flex;
+	margin-top: 100px;
+	justify-content: space-evenly;
+	padding: 0;
+}
+
+.review-input-list {
+	width: 85%;
+}
+
+@media screen and (max-width: breakpoints.$Small) {
+	.reviews {
+		margin-top: 20px;
+		flex-direction: column;
+	}
+
+	.review-input-list {
+		width: 100%;
+	}
+}

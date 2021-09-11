@@ -1,6 +1,37 @@
 <div class="review">
-	{{ review.comment }}
-	<div>
-		<app-rating [averageRating]="review.rating"></app-rating>
+	<ng-container *ngIf="review.user.image_url else noImage">
+		<img class="user-img" src="{{review.user.image_url}}" alt="User image">
+	</ng-container>
+
+	<ng-template #noImage>
+		<div class="acc-icon">
+			<mat-icon class="icon">account_circle</mat-icon>
+		</div>
+	</ng-template>
+
+	<div class="email-rating">
+		<span class="email">{{ review.user.email }}</span>
+		<div class="rating">
+			<app-rating [averageRating]="review.rating"></app-rating>
+			<span class="star" *ngFor="let i of [].constructor(review.rating)">
+				<mat-icon aria-hidden="false" aria-label="Rating star icon">star</mat-icon>
+			</span>
+		</div>
+	</div>
+
+	<div class="comment">
+		{{ review.comment }}
+		<ng-container *ngIf="review.user.email === uid">
+
+			<span>
+				<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+					<mat-icon>more_vert</mat-icon>
+				</button>
+			</span>
+		</ng-container>
+		
+		<mat-menu #menu class="menu">
+			<button mat-icon-button class="button" (click)="delete(review.id)">DELETE</button>
+		</mat-menu>
 	</div>
 </div>

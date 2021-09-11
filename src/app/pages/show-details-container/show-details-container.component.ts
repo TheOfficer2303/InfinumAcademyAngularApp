@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
@@ -69,12 +70,18 @@ export class ShowDetailsContainerComponent {
   public post(reviewFormData: IReviewFormData) {
     reviewFormData.show_id = this.activatedRoute.snapshot.paramMap.get('id');
     
-    this.reviewService.addReviewToShow(reviewFormData).pipe().
-    subscribe(
-      () => {
+    this.reviewService.addReviewToShow(reviewFormData).
+    subscribe(() => {
         this.trigger$.next(true);
       }
     )
+  }
+
+  public delete(id: string) {
+    this.reviewService.deleteReview(id).
+    subscribe(() => {
+      this.trigger$.next(true);
+    })
   }
 
 	constructor(private showService: ShowService, private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }

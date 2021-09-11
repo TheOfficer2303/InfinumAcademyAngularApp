@@ -1,10 +1,10 @@
-<mat-card>
-	<mat-card-title>Login</mat-card-title>
-	<form [formGroup]="loginForm">
-
-		<mat-form-field appearance="outline">
+<mat-card class="card">
+	<form class="form" [formGroup]="loginForm">
+		<app-logo class="logo"></app-logo>
+		
+		<mat-form-field class="field" appearance="outline">
 			<mat-label>Email</mat-label>
-			<input matInput formControlName="email">
+			<input class="input" matInput formControlName="email">
 			<mat-icon matPrefix>person</mat-icon>
 			<mat-error *ngIf="loginForm.get('email')?.errors?.required else notEmpty">Cannot be empty</mat-error>
 			<ng-template #notEmpty>
@@ -15,15 +15,15 @@
 			</ng-template>
 		</mat-form-field>
 
-		<mat-form-field appearance="outline">
+		<mat-form-field class="field" appearance="outline">
 			<mat-label>Password</mat-label>
-			<input matInput [type]="'password'" formControlName="password">
+			<input class="input" matInput [type]="'password'" formControlName="password">
 			<mat-icon matPrefix>lock</mat-icon>
 			<mat-error *ngIf="loginForm.get('password')?.errors?.required">Cannot be empty</mat-error>
 			<mat-error *ngIf="loginForm.get('password')?.errors?.minlength">Should be at least 8 characters long</mat-error>
 		</mat-form-field>
 
-		<button mat-raised-button (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
-		<p>Don't have an account? <a [routerLink]="'/register'">Register</a> now!</p>
+		<button class="button" mat-raised-button color="primary" (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
+		<p class="register">Don't have an account? <a [routerLink]="'/register'" class="link"><b>Register</b></a></p>
 	</form>
 </mat-card>

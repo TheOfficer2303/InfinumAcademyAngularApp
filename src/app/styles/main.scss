@@ -1,4 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import "src/app/styles/am-components/am";
+	
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
 
 body, html {
 	margin: 0;

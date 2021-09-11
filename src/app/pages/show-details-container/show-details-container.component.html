@@ -6,8 +6,16 @@
 	<app-error-message [error]="error"></app-error-message>
 </div>
 
-<ng-container *ngIf="(templateData$ | async) as template">
-	<app-show-detail [show]="template.show"></app-show-detail>
-	<app-review-form (postReview)="post($event)"></app-review-form>
-	<app-review-list [reviews]="template.reviews"></app-review-list>
-</ng-container>
+<div class="card">
+	<ng-container *ngIf="(templateData$ | async) as template">
+		<app-show-detail class="show" [show]="template.show"></app-show-detail>
+		<div class="reviews">
+			<span>Reviews</span>
+			<div class="review-input-list">
+				<app-review-form (postReview)="post($event)"></app-review-form>
+				
+				<app-review-list (deleteReview)="delete($event)" [reviews]="template.reviews"></app-review-list>
+			</div>
+		</div>
+	</ng-container>
+</div>

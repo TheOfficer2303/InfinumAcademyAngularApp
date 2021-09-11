@@ -1,6 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -17,7 +15,7 @@ import { LoginData } from './login-form/login-form.component';
 export class LoginContainerComponent {
   public isLoading$:Subject<boolean> = new Subject<boolean>()
 
-  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   public onLogin(loginData: LoginData) {
     this.isLoading$.next(true);
@@ -29,11 +27,6 @@ export class LoginContainerComponent {
       if (loginData) {
         this.router.navigate(['']);
       } 
-    }, (errResponse: HttpErrorResponse) => {
-      console.log(errResponse)
-      this.snackBar.open(errResponse.error.errors, 'Close', {
-        duration: 3500
-      })
     })
   }
 }

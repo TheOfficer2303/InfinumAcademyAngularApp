@@ -1,8 +1,29 @@
-<mat-drawer-container class="main-layout-drawer">
-  <mat-drawer mode="side" opened class="drawer">
-		<app-side-nav></app-side-nav>
-	</mat-drawer>
-  <mat-drawer-content class="drawer-content">
-		<router-outlet></router-outlet>
-	</mat-drawer-content>
-</mat-drawer-container>
+<ng-container *ngIf="layout$ | async as layout">
+	<mat-drawer-container class="main-layout-drawer">
+		<mat-drawer class="side-drawer"
+			[mode]="layout.isSmall ? 'over' : 'side'"
+			[position]="layout.isSmall ? 'end' : 'start'"
+			[opened]="!layout.isSmall"
+			#drawer
+		>
+		<div class="links">
+
+			<app-logo class="logo" *ngIf="!layout.isSmall"></app-logo>
+			
+			<button *ngIf="layout.isSmall" mat-icon-button (click)="drawer.close()"><mat-icon>highlight_off</mat-icon></button>
+			<app-side-nav></app-side-nav>
+			
+			<button class="log-out" (click)="logOut()">Log out</button>
+		</div>
+		</mat-drawer>
+		<mat-drawer-content class="drawer-content">
+			<header *ngIf="layout.isSmall" class="header">
+				<app-logo></app-logo>
+
+				<button mat-icon-button (click)="drawer.open()"><mat-icon>menu</mat-icon></button>
+			</header>
+
+			<router-outlet></router-outlet>
+		</mat-drawer-content>
+	</mat-drawer-container>
+</ng-container>

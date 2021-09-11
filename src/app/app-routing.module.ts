@@ -8,6 +8,7 @@ import { LoginContainerComponent } from './pages/login-container/login-container
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
     children: [
       { path: '', component: AllShowsContainerComponent },
       { path: 'top-rated', component: TopRatedContainerComponent },
-      { path: 'show/:id', component: ShowDetailsContainerComponent }
+      { path: 'show/:id', component: ShowDetailsContainerComponent },
+      { path: 'my-profile', component: MyProfileComponent }
     ],
     canActivate: [AppGuard]
   },
