@@ -6,5 +6,5 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./auth-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthLayoutComponent { }
 
+export class AuthLayoutComponent { }
