@@ -18,11 +18,10 @@ export class AuthErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((errResponse: HttpErrorResponse) => {
-        this.snackBar.open(errResponse.error.errors[0], 'Close', {
-          duration: 3500
-        })
-
         if (errResponse.status === 401 || errResponse.status === 403) {
+          this.snackBar.open(errResponse.error.errors[0], 'Close', {
+            duration: 3500
+          })
           this.router.navigate(['/login']);
           return EMPTY;
         } 
